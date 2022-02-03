@@ -7,11 +7,11 @@ import 'package:hs_mobile_app/app/app.dart';
 class App extends StatelessWidget {
   const App({
     Key? key,
-    required AuthenticationRepository authenticationRepository,
+    required IAuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
         super(key: key);
 
-  final AuthenticationRepository _authenticationRepository;
+  final IAuthenticationRepository _authenticationRepository;
 
   @override
   Widget build(BuildContext context) {
