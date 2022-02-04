@@ -19,6 +19,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  form_inputs:
+    path: packages/form_inputs
   formz: ^0.4.1
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0
