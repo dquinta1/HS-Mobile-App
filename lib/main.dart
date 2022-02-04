@@ -16,7 +16,8 @@ Future<void> main() async {
       projectId: dotenv.get('FIREBASE_PROJECT_ID'),
     ),
   );
-  final authenticationRepository = AuthenticationRepository();
+  final IAuthenticationRepository authenticationRepository =
+      FirebaseAuthentication();
   await authenticationRepository.user.first;
   BlocOverrides.runZoned(
       () => runApp(App(authenticationRepository: authenticationRepository)));
