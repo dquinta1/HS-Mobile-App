@@ -37,7 +37,7 @@ class _RouteControllerState extends State<RouteController> {
           ),
           IconButton(
             icon: const Icon(Icons.exit_to_app),
-            onPressed: () =>
+            onPressed: () => //! replace this method,logout should be elsewhere
                 context.read<AppBloc>().add(const AppEvent.logoutRequested()),
           ),
         ],

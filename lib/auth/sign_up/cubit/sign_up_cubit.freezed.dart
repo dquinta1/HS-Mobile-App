@@ -18,8 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SignUpStateTearOff {
   const _$SignUpStateTearOff();
 
-  _Initial initial() {
-    return const _Initial();
+  _SignUpState call(
+      {Email? email = const Email.pure(),
+      Password? password = const Password.pure(),
+      ConfirmedPassword? confirmedPassword = const ConfirmedPassword.pure(),
+      FormzStatus status = FormzStatus.pure,
+      String? errorMessage}) {
+    return _SignUpState(
+      email: email,
+      password: password,
+      confirmedPassword: confirmedPassword,
+      status: status,
+      errorMessage: errorMessage,
+    );
   }
 }
 
@@ -28,37 +39,15 @@ const $SignUpState = _$SignUpStateTearOff();
 
 /// @nodoc
 mixin _$SignUpState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) =>
+  Email? get email => throw _privateConstructorUsedError;
+  Password? get password => throw _privateConstructorUsedError;
+  ConfirmedPassword? get confirmedPassword =>
       throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    required TResult orElse(),
-  }) =>
+  FormzStatus get status => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SignUpStateCopyWith<SignUpState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -67,6 +56,12 @@ abstract class $SignUpStateCopyWith<$Res> {
   factory $SignUpStateCopyWith(
           SignUpState value, $Res Function(SignUpState) then) =
       _$SignUpStateCopyWithImpl<$Res>;
+  $Res call(
+      {Email? email,
+      Password? password,
+      ConfirmedPassword? confirmedPassword,
+      FormzStatus status,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -76,100 +71,177 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
   final SignUpState _value;
   // ignore: unused_field
   final $Res Function(SignUpState) _then;
-}
-
-/// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
 
   @override
-  _Initial get _value => super._value as _Initial;
+  $Res call({
+    Object? email = freezed,
+    Object? password = freezed,
+    Object? confirmedPassword = freezed,
+    Object? status = freezed,
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_value.copyWith(
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as Email?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as Password?,
+      confirmedPassword: confirmedPassword == freezed
+          ? _value.confirmedPassword
+          : confirmedPassword // ignore: cast_nullable_to_non_nullable
+              as ConfirmedPassword?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as FormzStatus,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$SignUpStateCopyWith<$Res>
+    implements $SignUpStateCopyWith<$Res> {
+  factory _$SignUpStateCopyWith(
+          _SignUpState value, $Res Function(_SignUpState) then) =
+      __$SignUpStateCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {Email? email,
+      Password? password,
+      ConfirmedPassword? confirmedPassword,
+      FormzStatus status,
+      String? errorMessage});
+}
+
+/// @nodoc
+class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
+    implements _$SignUpStateCopyWith<$Res> {
+  __$SignUpStateCopyWithImpl(
+      _SignUpState _value, $Res Function(_SignUpState) _then)
+      : super(_value, (v) => _then(v as _SignUpState));
+
+  @override
+  _SignUpState get _value => super._value as _SignUpState;
+
+  @override
+  $Res call({
+    Object? email = freezed,
+    Object? password = freezed,
+    Object? confirmedPassword = freezed,
+    Object? status = freezed,
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_SignUpState(
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as Email?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as Password?,
+      confirmedPassword: confirmedPassword == freezed
+          ? _value.confirmedPassword
+          : confirmedPassword // ignore: cast_nullable_to_non_nullable
+              as ConfirmedPassword?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as FormzStatus,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_SignUpState implements _SignUpState {
+  const _$_SignUpState(
+      {this.email = const Email.pure(),
+      this.password = const Password.pure(),
+      this.confirmedPassword = const ConfirmedPassword.pure(),
+      this.status = FormzStatus.pure,
+      this.errorMessage});
+
+  @JsonKey()
+  @override
+  final Email? email;
+  @JsonKey()
+  @override
+  final Password? password;
+  @JsonKey()
+  @override
+  final ConfirmedPassword? confirmedPassword;
+  @JsonKey()
+  @override
+  final FormzStatus status;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'SignUpState.initial()';
+    return 'SignUpState(email: $email, password: $password, confirmedPassword: $confirmedPassword, status: $status, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Initial);
+        (other.runtimeType == runtimeType &&
+            other is _SignUpState &&
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality()
+                .equals(other.confirmedPassword, confirmedPassword) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality()
+                .equals(other.errorMessage, errorMessage));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(confirmedPassword),
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(errorMessage));
 
+  @JsonKey(ignore: true)
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
+  _$SignUpStateCopyWith<_SignUpState> get copyWith =>
+      __$SignUpStateCopyWithImpl<_SignUpState>(this, _$identity);
 }
 
-abstract class _Initial implements SignUpState {
-  const factory _Initial() = _$_Initial;
+abstract class _SignUpState implements SignUpState {
+  const factory _SignUpState(
+      {Email? email,
+      Password? password,
+      ConfirmedPassword? confirmedPassword,
+      FormzStatus status,
+      String? errorMessage}) = _$_SignUpState;
+
+  @override
+  Email? get email;
+  @override
+  Password? get password;
+  @override
+  ConfirmedPassword? get confirmedPassword;
+  @override
+  FormzStatus get status;
+  @override
+  String? get errorMessage;
+  @override
+  @JsonKey(ignore: true)
+  _$SignUpStateCopyWith<_SignUpState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
