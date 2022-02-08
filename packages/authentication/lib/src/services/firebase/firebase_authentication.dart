@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 /// {@template firebase_authentication}
 /// Repository which implements authentication using firebase auth.
 /// {@endtemplate}
-class FirebaseAuthentication implements IAuthenticationRepository{
+class FirebaseAuthentication implements IAuthenticationRepository {
   /// {@macro firebase_authentication}
   FirebaseAuthentication({
     CacheClient? cache,
