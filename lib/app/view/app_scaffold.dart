@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hs_mobile_app/app/app.dart';
-import 'package:hs_mobile_app/router/home/home.dart';
-import 'package:hs_mobile_app/router/news/news.dart';
-import 'package:hs_mobile_app/router/propositions/propositions.dart';
+import 'package:hs_mobile_app/home/home.dart';
+import 'package:hs_mobile_app/news/news.dart';
+import 'package:hs_mobile_app/propositions/propositions.dart';
 
 /// This is a component intended to control the main routes of the app
 /// using a bottom navigation bar
-class RouteController extends StatefulWidget {
-  const RouteController({Key? key}) : super(key: key);
+class AppScaffold extends StatefulWidget {
+  const AppScaffold({Key? key}) : super(key: key);
 
-  static Page page() => const MaterialPage<void>(child: RouteController());
+  static Page page() => const MaterialPage<void>(child: AppScaffold());
 
   @override
-  _RouteControllerState createState() => _RouteControllerState();
+  _AppScaffoldState createState() => _AppScaffoldState();
 }
 
-class _RouteControllerState extends State<RouteController> {
+class _AppScaffoldState extends State<AppScaffold> {
   int _currentIndex = 1;
   String _title = 'Home Page';
   final List<Widget> _children = [
