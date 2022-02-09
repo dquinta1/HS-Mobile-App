@@ -28,13 +28,15 @@ dependencies:
   very_good_analysis: ^2.4.0
 
 dev_dependencies:
+  bloc_test: ^9.0.2
   build_runner: ^2.1.7
   flutter_dotenv: ^5.0.2
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^1.1.1
+  freezed: ^1.1.0
   json_serializable: ^6.1.4
+  mocktail: ^0.2.0
 
 flutter:
   uses-material-design: true
