@@ -7,6 +7,8 @@ class SignUpState with _$SignUpState {
     @Default(Password.pure()) Password? password,
     @Default(ConfirmedPassword.pure()) ConfirmedPassword? confirmedPassword,
     @Default(FormzStatus.pure) FormzStatus status,
+    String? name,
+    String? photo,
     String? errorMessage,
   }) = _SignUpState;
 }

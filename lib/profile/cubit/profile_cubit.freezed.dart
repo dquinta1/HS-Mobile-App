@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'home_cubit.dart';
+part of 'profile_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,8 +14,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$HomeStateTearOff {
-  const _$HomeStateTearOff();
+class _$ProfileStateTearOff {
+  const _$ProfileStateTearOff();
 
   _Initial initial() {
     return const _Initial();
@@ -23,10 +23,10 @@ class _$HomeStateTearOff {
 }
 
 /// @nodoc
-const $HomeState = _$HomeStateTearOff();
+const $ProfileState = _$ProfileStateTearOff();
 
 /// @nodoc
-mixin _$HomeState {
+mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -62,18 +62,19 @@ mixin _$HomeState {
 }
 
 /// @nodoc
-abstract class $HomeStateCopyWith<$Res> {
-  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
-      _$HomeStateCopyWithImpl<$Res>;
+abstract class $ProfileStateCopyWith<$Res> {
+  factory $ProfileStateCopyWith(
+          ProfileState value, $Res Function(ProfileState) then) =
+      _$ProfileStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._value, this._then);
+class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
+  _$ProfileStateCopyWithImpl(this._value, this._then);
 
-  final HomeState _value;
+  final ProfileState _value;
   // ignore: unused_field
-  final $Res Function(HomeState) _then;
+  final $Res Function(ProfileState) _then;
 }
 
 /// @nodoc
@@ -83,7 +84,7 @@ abstract class _$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+class __$InitialCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
       : super(_value, (v) => _then(v as _Initial));
@@ -99,7 +100,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'HomeState.initial()';
+    return 'ProfileState.initial()';
   }
 
   @override
@@ -168,6 +169,6 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements HomeState {
+abstract class _Initial implements ProfileState {
   const factory _Initial() = _$_Initial;
 }

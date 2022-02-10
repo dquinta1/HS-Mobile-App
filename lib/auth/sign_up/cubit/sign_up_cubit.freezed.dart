@@ -1,6 +1,5 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'sign_up_cubit.dart';
@@ -23,12 +22,16 @@ class _$SignUpStateTearOff {
       Password? password = const Password.pure(),
       ConfirmedPassword? confirmedPassword = const ConfirmedPassword.pure(),
       FormzStatus status = FormzStatus.pure,
+      String? name,
+      String? photo,
       String? errorMessage}) {
     return _SignUpState(
       email: email,
       password: password,
       confirmedPassword: confirmedPassword,
       status: status,
+      name: name,
+      photo: photo,
       errorMessage: errorMessage,
     );
   }
@@ -44,6 +47,8 @@ mixin _$SignUpState {
   ConfirmedPassword? get confirmedPassword =>
       throw _privateConstructorUsedError;
   FormzStatus get status => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get photo => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -61,6 +66,8 @@ abstract class $SignUpStateCopyWith<$Res> {
       Password? password,
       ConfirmedPassword? confirmedPassword,
       FormzStatus status,
+      String? name,
+      String? photo,
       String? errorMessage});
 }
 
@@ -78,6 +85,8 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
     Object? password = freezed,
     Object? confirmedPassword = freezed,
     Object? status = freezed,
+    Object? name = freezed,
+    Object? photo = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
@@ -97,6 +106,14 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as FormzStatus,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photo: photo == freezed
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -117,6 +134,8 @@ abstract class _$SignUpStateCopyWith<$Res>
       Password? password,
       ConfirmedPassword? confirmedPassword,
       FormzStatus status,
+      String? name,
+      String? photo,
       String? errorMessage});
 }
 
@@ -136,6 +155,8 @@ class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
     Object? password = freezed,
     Object? confirmedPassword = freezed,
     Object? status = freezed,
+    Object? name = freezed,
+    Object? photo = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_SignUpState(
@@ -155,6 +176,14 @@ class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as FormzStatus,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photo: photo == freezed
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -171,6 +200,8 @@ class _$_SignUpState implements _SignUpState {
       this.password = const Password.pure(),
       this.confirmedPassword = const ConfirmedPassword.pure(),
       this.status = FormzStatus.pure,
+      this.name,
+      this.photo,
       this.errorMessage});
 
   @JsonKey()
@@ -186,11 +217,15 @@ class _$_SignUpState implements _SignUpState {
   @override
   final FormzStatus status;
   @override
+  final String? name;
+  @override
+  final String? photo;
+  @override
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'SignUpState(email: $email, password: $password, confirmedPassword: $confirmedPassword, status: $status, errorMessage: $errorMessage)';
+    return 'SignUpState(email: $email, password: $password, confirmedPassword: $confirmedPassword, status: $status, name: $name, photo: $photo, errorMessage: $errorMessage)';
   }
 
   @override
@@ -203,6 +238,8 @@ class _$_SignUpState implements _SignUpState {
             const DeepCollectionEquality()
                 .equals(other.confirmedPassword, confirmedPassword) &&
             const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.photo, photo) &&
             const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage));
   }
@@ -214,6 +251,8 @@ class _$_SignUpState implements _SignUpState {
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(confirmedPassword),
       const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(photo),
       const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
@@ -228,6 +267,8 @@ abstract class _SignUpState implements SignUpState {
       Password? password,
       ConfirmedPassword? confirmedPassword,
       FormzStatus status,
+      String? name,
+      String? photo,
       String? errorMessage}) = _$_SignUpState;
 
   @override
@@ -238,6 +279,10 @@ abstract class _SignUpState implements SignUpState {
   ConfirmedPassword? get confirmedPassword;
   @override
   FormzStatus get status;
+  @override
+  String? get name;
+  @override
+  String? get photo;
   @override
   String? get errorMessage;
   @override

@@ -12,6 +12,13 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   final IAuthenticationRepository _authenticationRepository;
 
+  void nameChanged(String value) {
+    final name = value;
+    emit(state.copyWith(
+      name: name,
+    ));
+  }
+
   void emailChanged(String value) {
     final email = Email.dirty(value);
 
@@ -58,7 +65,11 @@ class SignUpCubit extends Cubit<SignUpState> {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
         await _authenticationRepository.signUp(
-            email: state.email!.value, password: state.password!.value);
+          email: state.email!.value,
+          password: state.password!.value,
+          name: state.name,
+          photo: state.photo,
+        );
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
       } on SignUpWithEmailAndPasswordFailure catch (e) {
         emit(state.copyWith(

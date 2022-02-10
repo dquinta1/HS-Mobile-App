@@ -25,6 +25,14 @@ class SignUpForm extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: const [
+            _PhotoUpload(),
+            SizedBox(
+              height: 8,
+            ),
+            _NameInput(),
+            SizedBox(
+              height: 8,
+            ),
             _EmailInput(),
             SizedBox(
               height: 8,
@@ -41,6 +49,60 @@ class SignUpForm extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _PhotoUpload extends StatelessWidget {
+  const _PhotoUpload({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.photo != current.photo,
+      builder: (context, state) {
+        return TextButton(
+          onPressed: () {
+            throw UnimplementedError('uploadProfileAvatar()');
+          },
+          child: CircleAvatar(
+            backgroundColor: Colors.grey.shade700,
+            foregroundImage: (context.read<SignUpCubit>().state.photo == null)
+                ? null
+                : NetworkImage(context.read<SignUpCubit>().state.photo!),
+            radius: 35,
+            child: (context.read<SignUpCubit>().state.photo == null)
+                ? const Icon(
+                    Icons.person,
+                    color: Colors.black38,
+                    size: 50,
+                  )
+                : null,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _NameInput extends StatelessWidget {
+  const _NameInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.name != current.name,
+      builder: (context, state) {
+        return TextField(
+          key: const Key('signUpForm_nameInput_textField'),
+          onChanged: (name) => context.read<SignUpCubit>().nameChanged(name),
+          keyboardType: TextInputType.name,
+          decoration: const InputDecoration(
+            labelText: 'name',
+            helperText: '',
+          ),
+        );
+      },
     );
   }
 }
