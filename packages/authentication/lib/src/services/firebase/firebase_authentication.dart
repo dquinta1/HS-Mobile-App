@@ -39,6 +39,7 @@ class FirebaseAuthentication implements IAuthenticationRepository {
   /// the authentication state changes.
   ///
   /// Emits [User.empty] if the user is not authenticated.
+  @override
   Stream<User> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
@@ -49,6 +50,7 @@ class FirebaseAuthentication implements IAuthenticationRepository {
 
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
+  @override
   User get currentUser {
     return _cache.read<User>(key: userCacheKey) ?? User.empty;
   }
@@ -56,12 +58,20 @@ class FirebaseAuthentication implements IAuthenticationRepository {
   /// Creates a new user with the provided [email] and [password].
   ///
   /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
-  Future<void> signUp({required String email, required String password}) async {
+  @override
+  Future<void> signUp({
+    required String email,
+    required String password,
+    String? name,
+    String? photo,
+  }) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await _firebaseAuth.currentUser!.updateDisplayName(name);
+      await _firebaseAuth.currentUser!.updatePhotoURL(photo);
     } on FirebaseAuthException catch (e) {
       throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {
@@ -101,6 +111,7 @@ class FirebaseAuthentication implements IAuthenticationRepository {
   /// Signs in with the provided [email] and [password].
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
+  @override
   Future<void> logInWithEmailAndPassword({
     required String email,
     required String password,
@@ -119,6 +130,7 @@ class FirebaseAuthentication implements IAuthenticationRepository {
   /// [User.empty] from the [user] Stream.
   ///
   /// Throws a [LogOutFailure] if an exception occurs.
+  @override
   Future<void> logOut() async {
     try {
       await Future.wait([
@@ -127,6 +139,29 @@ class FirebaseAuthentication implements IAuthenticationRepository {
       ]);
     } catch (_) {
       throw LogOutFailure();
+    }
+  }
+
+  @override
+  Future<void> updateUserProfile({
+    String? email,
+    String? password,
+    String? name,
+    String? photo,
+  }) async {
+    try {
+      await _firebaseAuth.currentUser!.updateDisplayName(name);
+      await _firebaseAuth.currentUser!.updatePhotoURL(photo);
+      if (email != null) {
+        await _firebaseAuth.currentUser!.updateEmail(email);
+      }
+      if (password != null) {
+        await _firebaseAuth.currentUser!.updatePassword(password);
+      }
+    } on FirebaseAuthException catch (e) {
+      throw UpdateProfileFailure.fromCode(e.code);
+    } catch (_) {
+      throw UpdateProfileFailure();
     }
   }
 }

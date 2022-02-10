@@ -137,3 +137,36 @@ class LogInWithGoogleFailure implements Exception {
 
 /// Thrown during the logout process if a failure occurs.
 class LogOutFailure implements Exception {}
+
+/// {@template update_profile_failure}
+/// Thrown during the profile update process if a failure occurs.
+/// https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/updateProfile.html
+/// {@endtemplate}
+class UpdateProfileFailure implements Exception {
+  /// {@macro update_profile_failure}
+  const UpdateProfileFailure([
+    this.message = 'An unknown error occurred.',
+  ]);
+
+  /// Create an authentication message
+  /// from a firebase authentication exception code.
+  factory UpdateProfileFailure.fromCode(String code) {
+    switch (code) {
+      case 'invalid-email':
+        return const UpdateProfileFailure('Invalid email provided');
+      case 'email-already-in-use':
+        return const UpdateProfileFailure('This email is already in use.');
+      case 'requires-recent-login':
+        return const UpdateProfileFailure(
+          'You are required to sign in again before proceeding with this action',
+        );
+      case 'weak-password':
+        return const UpdateProfileFailure('The new password is too weak');
+      default:
+        return const UpdateProfileFailure();
+    }
+  }
+
+  /// The associated error message.
+  final String message;
+}

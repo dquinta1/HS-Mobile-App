@@ -10,10 +10,12 @@ class MockAuthentication implements IAuthenticationRepository {
 
   final StreamController<User> _controller;
 
+  @override
   User get currentUser {
     return User(id: 'test', email: 'test@test.com', name: 'Test User');
   }
 
+  @override
   Future<void> logInWithEmailAndPassword(
       {required String email, required String password}) {
     if ((email == 'test@test.com' && password == 'test1234')) {
@@ -24,12 +26,19 @@ class MockAuthentication implements IAuthenticationRepository {
     }
   }
 
+  @override
   Future<void> logOut() {
     _controller.add(User.empty);
     return Future.delayed(Duration(seconds: 1));
   }
 
-  Future<void> signUp({required String email, required String password}) {
+  @override
+  Future<void> signUp({
+    required String email,
+    required String password,
+    String? name,
+    String? photo,
+  }) {
     if ((email == 'test@test.com' && password == 'test1234')) {
       return Future.error(
           SignUpWithEmailAndPasswordFailure.fromCode('email-already-in-use'));
@@ -39,7 +48,22 @@ class MockAuthentication implements IAuthenticationRepository {
     }
   }
 
+  @override
   Stream<User> get user {
     return _controller.stream;
+  }
+
+  @override
+  Future<void> updateUserProfile({
+    String? email,
+    String? password,
+    String? name,
+    String? photo,
+  }) {
+    if (name == 'break it') {
+      return Future.error(UpdateProfileFailure);
+    } else {
+      return Future.delayed(Duration(milliseconds: 200));
+    }
   }
 }
