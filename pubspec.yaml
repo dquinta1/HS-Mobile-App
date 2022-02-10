@@ -15,6 +15,8 @@ dependencies:
     path: packages/authentication
   bloc: ^8.0.2
   cupertino_icons: ^1.0.2
+  data_repository:
+    path: packages/data
   flow_builder: ^0.0.6
   flutter:
     sdk: flutter
