@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hs_mobile_app/app/app.dart';
 import 'package:hs_mobile_app/home/home.dart';
 import 'package:hs_mobile_app/news/news.dart';
+import 'package:hs_mobile_app/profile/profile.dart';
 import 'package:hs_mobile_app/propositions/propositions.dart';
 
 /// This is a component intended to control the main routes of the app
@@ -33,7 +34,8 @@ class _AppScaffoldState extends State<AppScaffold> {
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () {},
+            onPressed: () =>
+                Navigator.of(context).push<void>(ProfilePage.route()),
           ),
           IconButton(
             icon: const Icon(Icons.exit_to_app),

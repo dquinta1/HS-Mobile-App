@@ -41,7 +41,7 @@ class FirebaseAuthentication implements IAuthenticationRepository {
   /// Emits [User.empty] if the user is not authenticated.
   @override
   Stream<User> get user {
-    return _firebaseAuth.authStateChanges().map((firebaseUser) {
+    return _firebaseAuth.userChanges().map((firebaseUser) {
       final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
       _cache.write(key: userCacheKey, value: user);
       return user;
@@ -52,7 +52,9 @@ class FirebaseAuthentication implements IAuthenticationRepository {
   /// Defaults to [User.empty] if there is no cached user.
   @override
   User get currentUser {
-    return _cache.read<User>(key: userCacheKey) ?? User.empty;
+    return _firebaseAuth.currentUser == null
+        ? User.empty
+        : _firebaseAuth.currentUser!.toUser;
   }
 
   /// Creates a new user with the provided [email] and [password].
@@ -150,8 +152,12 @@ class FirebaseAuthentication implements IAuthenticationRepository {
     String? photo,
   }) async {
     try {
-      await _firebaseAuth.currentUser!.updateDisplayName(name);
-      await _firebaseAuth.currentUser!.updatePhotoURL(photo);
+      if (name != null) {
+        await _firebaseAuth.currentUser!.updateDisplayName(name);
+      }
+      if (photo != null) {
+        await _firebaseAuth.currentUser!.updatePhotoURL(photo);
+      }
       if (email != null) {
         await _firebaseAuth.currentUser!.updateEmail(email);
       }
