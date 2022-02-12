@@ -118,9 +118,6 @@ class ProfileCubit extends Cubit<ProfileState> {
           photo: state.photo,
         );
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
-        // _bloc.add(AppEvent.userChanged(user: _bloc.state.user));
-        final appState = await _bloc.stream.last;
-        _bloc.add(AppEvent.userChanged(user: appState.user));
       } on UpdateProfileFailure catch (e) {
         emit(state.copyWith(
           errorMessage: e.message,
