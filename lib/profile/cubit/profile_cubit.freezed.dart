@@ -19,20 +19,20 @@ class _$ProfileStateTearOff {
 
   _ProfileState call(
       {bool isEditing = false,
-      String? name = '',
       Email? email = const Email.pure(),
       Password? password = const Password.pure(),
       ConfirmedPassword? confirmedPassword = const ConfirmedPassword.pure(),
       FormzStatus status = FormzStatus.pure,
+      String? name,
       String? photo,
       String? errorMessage}) {
     return _ProfileState(
       isEditing: isEditing,
-      name: name,
       email: email,
       password: password,
       confirmedPassword: confirmedPassword,
       status: status,
+      name: name,
       photo: photo,
       errorMessage: errorMessage,
     );
@@ -45,12 +45,12 @@ const $ProfileState = _$ProfileStateTearOff();
 /// @nodoc
 mixin _$ProfileState {
   bool get isEditing => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
   Email? get email => throw _privateConstructorUsedError;
   Password? get password => throw _privateConstructorUsedError;
   ConfirmedPassword? get confirmedPassword =>
       throw _privateConstructorUsedError;
   FormzStatus get status => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
@@ -66,11 +66,11 @@ abstract class $ProfileStateCopyWith<$Res> {
       _$ProfileStateCopyWithImpl<$Res>;
   $Res call(
       {bool isEditing,
-      String? name,
       Email? email,
       Password? password,
       ConfirmedPassword? confirmedPassword,
       FormzStatus status,
+      String? name,
       String? photo,
       String? errorMessage});
 }
@@ -86,11 +86,11 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
   @override
   $Res call({
     Object? isEditing = freezed,
-    Object? name = freezed,
     Object? email = freezed,
     Object? password = freezed,
     Object? confirmedPassword = freezed,
     Object? status = freezed,
+    Object? name = freezed,
     Object? photo = freezed,
     Object? errorMessage = freezed,
   }) {
@@ -99,10 +99,6 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
           ? _value.isEditing
           : isEditing // ignore: cast_nullable_to_non_nullable
               as bool,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -119,6 +115,10 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as FormzStatus,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       photo: photo == freezed
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
@@ -140,11 +140,11 @@ abstract class _$ProfileStateCopyWith<$Res>
   @override
   $Res call(
       {bool isEditing,
-      String? name,
       Email? email,
       Password? password,
       ConfirmedPassword? confirmedPassword,
       FormzStatus status,
+      String? name,
       String? photo,
       String? errorMessage});
 }
@@ -162,11 +162,11 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isEditing = freezed,
-    Object? name = freezed,
     Object? email = freezed,
     Object? password = freezed,
     Object? confirmedPassword = freezed,
     Object? status = freezed,
+    Object? name = freezed,
     Object? photo = freezed,
     Object? errorMessage = freezed,
   }) {
@@ -175,10 +175,6 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
           ? _value.isEditing
           : isEditing // ignore: cast_nullable_to_non_nullable
               as bool,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -195,6 +191,10 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as FormzStatus,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       photo: photo == freezed
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
@@ -212,20 +212,17 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
 class _$_ProfileState with DiagnosticableTreeMixin implements _ProfileState {
   const _$_ProfileState(
       {this.isEditing = false,
-      this.name = '',
       this.email = const Email.pure(),
       this.password = const Password.pure(),
       this.confirmedPassword = const ConfirmedPassword.pure(),
       this.status = FormzStatus.pure,
+      this.name,
       this.photo,
       this.errorMessage});
 
   @JsonKey()
   @override
   final bool isEditing;
-  @JsonKey()
-  @override
-  final String? name;
   @JsonKey()
   @override
   final Email? email;
@@ -239,13 +236,15 @@ class _$_ProfileState with DiagnosticableTreeMixin implements _ProfileState {
   @override
   final FormzStatus status;
   @override
+  final String? name;
+  @override
   final String? photo;
   @override
   final String? errorMessage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileState(isEditing: $isEditing, name: $name, email: $email, password: $password, confirmedPassword: $confirmedPassword, status: $status, photo: $photo, errorMessage: $errorMessage)';
+    return 'ProfileState(isEditing: $isEditing, email: $email, password: $password, confirmedPassword: $confirmedPassword, status: $status, name: $name, photo: $photo, errorMessage: $errorMessage)';
   }
 
   @override
@@ -254,11 +253,11 @@ class _$_ProfileState with DiagnosticableTreeMixin implements _ProfileState {
     properties
       ..add(DiagnosticsProperty('type', 'ProfileState'))
       ..add(DiagnosticsProperty('isEditing', isEditing))
-      ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('confirmedPassword', confirmedPassword))
       ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('photo', photo))
       ..add(DiagnosticsProperty('errorMessage', errorMessage));
   }
@@ -269,12 +268,12 @@ class _$_ProfileState with DiagnosticableTreeMixin implements _ProfileState {
         (other.runtimeType == runtimeType &&
             other is _ProfileState &&
             const DeepCollectionEquality().equals(other.isEditing, isEditing) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality()
                 .equals(other.confirmedPassword, confirmedPassword) &&
             const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.photo, photo) &&
             const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage));
@@ -284,11 +283,11 @@ class _$_ProfileState with DiagnosticableTreeMixin implements _ProfileState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isEditing),
-      const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(confirmedPassword),
       const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(photo),
       const DeepCollectionEquality().hash(errorMessage));
 
@@ -301,18 +300,16 @@ class _$_ProfileState with DiagnosticableTreeMixin implements _ProfileState {
 abstract class _ProfileState implements ProfileState {
   const factory _ProfileState(
       {bool isEditing,
-      String? name,
       Email? email,
       Password? password,
       ConfirmedPassword? confirmedPassword,
       FormzStatus status,
+      String? name,
       String? photo,
       String? errorMessage}) = _$_ProfileState;
 
   @override
   bool get isEditing;
-  @override
-  String? get name;
   @override
   Email? get email;
   @override
@@ -321,6 +318,8 @@ abstract class _ProfileState implements ProfileState {
   ConfirmedPassword? get confirmedPassword;
   @override
   FormzStatus get status;
+  @override
+  String? get name;
   @override
   String? get photo;
   @override

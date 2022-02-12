@@ -41,12 +41,18 @@ class ProfileView extends StatelessWidget {
               onPressed: () => Navigator.of(context).pop(),
             ),
             actions: const [
-              _EditButton(),
+              //! replace with ternary operator to replace button with null
+              //! when profile is being edited, form submission is executed
+              //! from the form itself
+              _EditButton(), //? replace with regular ElevatedButton
             ],
           ),
-          body: state.isEditing
-              ? const EditProfileForm()
-              : const VisualProfileForm(),
+          body: Padding(
+            padding: const EdgeInsets.all(8),
+            child: state.isEditing
+                ? const EditProfileForm()
+                : const VisualProfileForm(),
+          ),
         );
       },
     );

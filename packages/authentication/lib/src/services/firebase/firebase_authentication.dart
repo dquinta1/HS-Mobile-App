@@ -150,8 +150,12 @@ class FirebaseAuthentication implements IAuthenticationRepository {
     String? photo,
   }) async {
     try {
-      await _firebaseAuth.currentUser!.updateDisplayName(name);
-      await _firebaseAuth.currentUser!.updatePhotoURL(photo);
+      if (name != null) {
+        await _firebaseAuth.currentUser!.updateDisplayName(name);
+      }
+      if (photo != null) {
+        await _firebaseAuth.currentUser!.updatePhotoURL(photo);
+      }
       if (email != null) {
         await _firebaseAuth.currentUser!.updateEmail(email);
       }

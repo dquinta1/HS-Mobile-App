@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -22,10 +24,20 @@ class ProfileCubit extends Cubit<ProfileState> {
       email: Email.dirty(_bloc.state.user.email!),
       photo: _bloc.state.user.photo,
     ));
+
+    _appBlocSubscription = _bloc.stream.listen((state) {
+      emit(ProfileState(
+        isEditing: false,
+        name: state.user.name,
+        email: Email.dirty(state.user.email!),
+        photo: state.user.photo,
+      ));
+    });
   }
 
   final IAuthenticationRepository _authenticationRepository;
   final AppBloc _bloc;
+  late final StreamSubscription<AppState> _appBlocSubscription;
 
   /// Handles switching between Static profile view and Editing profile view
   void editing(bool isEditing) {
@@ -45,6 +57,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   void nameChanged(String name) {
     emit(state.copyWith(
       name: name,
+      status: state.status.isPure || state.status.isValidated
+          ? FormzStatus.valid
+          : state.status,
     ));
   }
 
@@ -98,11 +113,14 @@ class ProfileCubit extends Cubit<ProfileState> {
       try {
         await _authenticationRepository.updateUserProfile(
           name: state.name,
-          email: state.email!.value,
-          password: state.password!.value,
+          email: state.email!.value == '' ? null : state.email!.value,
+          password: state.password!.value == '' ? null : state.password!.value,
           photo: state.photo,
         );
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        // _bloc.add(AppEvent.userChanged(user: _bloc.state.user));
+        final appState = await _bloc.stream.last;
+        _bloc.add(AppEvent.userChanged(user: appState.user));
       } on UpdateProfileFailure catch (e) {
         emit(state.copyWith(
           errorMessage: e.message,
@@ -112,5 +130,11 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(state.copyWith(status: FormzStatus.submissionFailure));
       }
     }
+  }
+
+  @override
+  Future<void> close() {
+    _appBlocSubscription.cancel();
+    return super.close();
   }
 }

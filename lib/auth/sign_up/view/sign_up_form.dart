@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:hs_mobile_app/auth/auth.dart';
+import 'package:hs_mobile_app/widgets/widgets.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -27,23 +28,23 @@ class SignUpForm extends StatelessWidget {
           children: const [
             _PhotoUpload(),
             SizedBox(
-              height: 8,
+              height: 8
             ),
             _NameInput(),
             SizedBox(
-              height: 8,
+              height: 8
             ),
             _EmailInput(),
             SizedBox(
-              height: 8,
+              height: 8
             ),
             _PasswordInput(),
             SizedBox(
-              height: 8,
+              height: 8
             ),
             _ConfirmedPasswordInput(),
             SizedBox(
-              height: 8,
+              height: 8
             ),
             _SignUpButton(),
           ],
@@ -65,20 +66,8 @@ class _PhotoUpload extends StatelessWidget {
           onPressed: () {
             throw UnimplementedError('uploadProfileAvatar()');
           },
-          child: CircleAvatar(
-            backgroundColor: Colors.grey.shade700,
-            foregroundImage: (context.read<SignUpCubit>().state.photo == null)
-                ? null
-                : NetworkImage(context.read<SignUpCubit>().state.photo!),
-            radius: 35,
-            child: (context.read<SignUpCubit>().state.photo == null)
-                ? const Icon(
-                    Icons.person,
-                    color: Colors.black38,
-                    size: 50,
-                  )
-                : null,
-          ),
+          child: CustomCircleAvatar(
+              photo: context.read<SignUpCubit>().state.photo),
         );
       },
     );
