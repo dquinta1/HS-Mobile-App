@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -7,16 +8,19 @@ import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hs_mobile_app/app/app.dart';
+import 'package:storage_repository/storage_repository.dart';
 
 part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit({
-    required IAuthenticationRepository authenticationRepository,
     required AppBloc bloc,
-  })  : _authenticationRepository = authenticationRepository,
-        _bloc = bloc,
+    required IAuthenticationRepository authenticationRepository,
+    required IStorageRepository storageRepository,
+  })  : _bloc = bloc,
+        _authenticationRepository = authenticationRepository,
+        _storageRepository = storageRepository,
         super(const ProfileState()) {
     emit(ProfileState(
       isEditing: false,
@@ -35,8 +39,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
   }
 
-  final IAuthenticationRepository _authenticationRepository;
   final AppBloc _bloc;
+  final IAuthenticationRepository _authenticationRepository;
+  final IStorageRepository _storageRepository;
   late final StreamSubscription<AppState> _appBlocSubscription;
 
   /// Handles switching between Static profile view and Editing profile view
@@ -98,8 +103,26 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   /// handle photo upload logic
-  Future<void> photoChanged(String photo) async {
-    //TODO: implement this
+  Future<void> uploadAvatar(bool gallery) async {
+    try {
+      // emit(state.copyWith(status: FormzStatus.submissionInProgress));
+      final _image = await getImage(gallery);
+      final _url = await _storageRepository.uploadImage(image: _image);
+      emit(state.copyWith(
+        photo: _url,
+        status: state.status.isPure || state.status.isValidated
+            ? FormzStatus.valid
+            : state.status,
+      ));
+    } on FileSystemException catch (e) {
+      emit(state.copyWith(
+        errorMessage: e.message,
+        status: FormzStatus.submissionFailure,
+      ));
+    } catch (_) {
+      // throw e;
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
+    }
   }
 
   /// handles form submission and attempts to execute updateProfile

@@ -2,9 +2,17 @@
 
 ### Data Layer
 
-#### Storage Integration (images)
+#### Storage Integration (images) - Storage Repository
 
-#### Firestore Integration
+- Firebase Storage: Implement [getImageUrl]
+- Firebase Storage: Implement [getImageReference]
+- Firebase Storage: Implement [deleteImage]
+- Mock Storage: Implement [uploadImage]
+- Mock Storage: Implement [getImageUrl]
+- Mock Storage: Implement [getImageReference]
+- Mock Storage: Implement [deleteImage]
+
+#### Firestore Integration - Database Repository
 
 #### HSMap APIs
 
@@ -12,19 +20,19 @@
 
 #### Auth
 
-- Sign Up: implement image upload functionality
 - Third Party: Integrate with Google and others
 - Form Validation: Add more informative and visual validation error messages
 
-#### Profile
-
-- Image Upload: not implemented
-
 #### Test (BLoCs)
 
-- Sign Up (after image upload is implemented)
-- Profile: EditProfile (after image upload is implemented)
+- Sign Up: Image Upload
+- Profile: Image Upload
 
 ### Presentation Layer
+
+- Log In
+- Sign Up
+- Profile
+- Edit Profile
 
 #### ADD REMAINING UI STUFF HERE

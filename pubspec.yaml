@@ -27,6 +27,8 @@ dependencies:
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0
   meta: ^1.7.0
+  storage_repository:
+    path: packages/file_storage
   very_good_analysis: ^2.4.0
 
 dev_dependencies:

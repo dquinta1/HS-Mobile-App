@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hs_mobile_app/auth/auth.dart';
+import 'package:storage_repository/storage_repository.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -23,7 +24,10 @@ class SignUpPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: BlocProvider<SignUpCubit>(
-          create: (_) => SignUpCubit(context.read<IAuthenticationRepository>()),
+          create: (_) => SignUpCubit(
+            authenticationRepository: context.read<IAuthenticationRepository>(),
+            storageRepository: context.read<IStorageRepository>(),
+          ),
           child: const SignUpForm(),
         ),
       ),

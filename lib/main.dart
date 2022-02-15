@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hs_mobile_app/app/app.dart';
 import 'package:hs_mobile_app/env_config.dart';
+import 'package:storage_repository/storage_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,18 +17,24 @@ Future<void> main() async {
       messagingSenderId:
           dotenv.get('FIREBASE_MESSAGING_SENDER_ID', fallback: 'X'),
       projectId: dotenv.get('FIREBASE_PROJECT_ID', fallback: 'X'),
+      storageBucket: dotenv.get('FIREBASE_STORAGE_BUCKET', fallback: 'X'),
     ),
   );
   final IAuthenticationRepository authenticationRepository;
+  final IStorageRepository storageRepository;
   if (envConfig == EnvironmentConfiguration.prod) {
     authenticationRepository = FirebaseAuthentication();
+    storageRepository = FirebaseStorageRepository();
 
     // awaits until firebase can get user from cache, else user.unauth'd
     await authenticationRepository.user.first;
   } else {
     authenticationRepository = MockAuthentication();
+    storageRepository = MockStorage();
   }
 
-  BlocOverrides.runZoned(
-      () => runApp(App(authenticationRepository: authenticationRepository)));
+  BlocOverrides.runZoned(() => runApp(App(
+        authenticationRepository: authenticationRepository,
+        storageRepository: storageRepository,
+      )));
 }

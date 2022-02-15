@@ -1,16 +1,25 @@
+import 'dart:io';
+
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:storage_repository/storage_repository.dart';
 
 part 'sign_up_state.dart';
 part 'sign_up_cubit.freezed.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit(this._authenticationRepository) : super(const SignUpState());
+  SignUpCubit({
+    required IAuthenticationRepository authenticationRepository,
+    required IStorageRepository storageRepository,
+  })  : _authenticationRepository = authenticationRepository,
+        _storageRepository = storageRepository,
+        super(const SignUpState());
 
   final IAuthenticationRepository _authenticationRepository;
+  final IStorageRepository _storageRepository;
 
   void nameChanged(String value) {
     final name = value;
@@ -55,6 +64,29 @@ class SignUpCubit extends Cubit<SignUpState> {
           state.password!,
           confirmedPassword,
         ])));
+  }
+
+  /// handle photo upload logic
+  Future<void> uploadAvatar(bool gallery) async {
+    try {
+      // emit(state.copyWith(status: FormzStatus.submissionInProgress));
+      final _image = await getImage(gallery);
+      final _url = await _storageRepository.uploadImage(image: _image);
+      emit(state.copyWith(
+        photo: _url,
+        status: state.status.isPure || state.status.isValidated
+            ? FormzStatus.valid
+            : state.status,
+      ));
+    } on FileSystemException catch (e) {
+      emit(state.copyWith(
+        errorMessage: e.message,
+        status: FormzStatus.submissionFailure,
+      ));
+    } catch (_) {
+      // throw e;
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
+    }
   }
 
   Future<void> signUpFormSubmitted() async {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hs_mobile_app/app/app.dart';
 import 'package:hs_mobile_app/profile/profile.dart';
+import 'package:storage_repository/storage_repository.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class ProfilePage extends StatelessWidget {
     return BlocProvider<ProfileCubit>(
       create: (_) => ProfileCubit(
         authenticationRepository: context.read<IAuthenticationRepository>(),
+        storageRepository: context.read<IStorageRepository>(),
         bloc: context.read<AppBloc>(),
       ),
       child: const ProfileView(),
