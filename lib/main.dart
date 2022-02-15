@@ -17,6 +17,7 @@ Future<void> main() async {
       messagingSenderId:
           dotenv.get('FIREBASE_MESSAGING_SENDER_ID', fallback: 'X'),
       projectId: dotenv.get('FIREBASE_PROJECT_ID', fallback: 'X'),
+      storageBucket: dotenv.get('FIREBASE_STORAGE_BUCKET', fallback: 'X'),
     ),
   );
   final IAuthenticationRepository authenticationRepository;

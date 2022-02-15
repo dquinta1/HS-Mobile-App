@@ -61,9 +61,38 @@ class _PhotoUpload extends StatelessWidget {
       buildWhen: (previous, current) => previous.photo != current.photo,
       builder: (context, state) {
         return TextButton(
-          onPressed: () {
-            throw UnimplementedError('uploadProfileAvatar()');
-          },
+          onPressed: () => showDialog<void>(
+            context: context,
+            builder: (BuildContext dialog) {
+              return AlertDialog(
+                title: const Text('Change Profile Picture'),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      await context
+                          .read<ProfileCubit>()
+                          .uploadAvatar(true) // pick from gallery
+                          .then((_) => Navigator.pop(dialog));
+                    },
+                    child: const Text('Choose Photo'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await context
+                          .read<ProfileCubit>()
+                          .uploadAvatar(false) // take photo with camera
+                          .then((_) => Navigator.pop(dialog));
+                    },
+                    child: const Text('Take Photo'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(dialog, 'Cancel'),
+                    child: const Text('Cancel'),
+                  ),
+                ],
+              );
+            },
+          ),
           child: CustomCircleAvatar(
               photo: context.read<ProfileCubit>().state.photo),
         );

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
@@ -23,8 +22,9 @@ class FirebaseStorageRepository implements IStorageRepository {
       String url =
           await _firebaseStorage.ref('profile/$filePath').getDownloadURL();
       return url;
-    } on FirebaseException catch (_) {
-      throw UnimplementedError('Implement ImageStorageException');
+    } on FirebaseException catch (e) {
+      print(e.message);
+      throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     }
   }
 

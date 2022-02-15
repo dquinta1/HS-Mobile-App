@@ -11,7 +11,9 @@ class HomePage extends StatelessWidget {
       // ignore: unnecessary_parenthesis
       builder: ((context, state) {
         return Center(
-          child: Text(context.read<AppBloc>().state.user.name!),
+          child: context.read<AppBloc>().state.user.name == null
+              ? const Text('')
+              : Text(context.read<AppBloc>().state.user.name!),
         );
       }),
     );
