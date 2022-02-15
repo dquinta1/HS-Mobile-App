@@ -3,14 +3,21 @@ import 'package:bloc/bloc.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:storage_repository/storage_repository.dart';
 
 part 'sign_up_state.dart';
 part 'sign_up_cubit.freezed.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit(this._authenticationRepository) : super(const SignUpState());
+  SignUpCubit({
+    required IAuthenticationRepository authenticationRepository,
+    required IStorageRepository storageRepository,
+  })  : _authenticationRepository = authenticationRepository,
+        _storageRepository = storageRepository,
+        super(const SignUpState());
 
   final IAuthenticationRepository _authenticationRepository;
+  final IStorageRepository _storageRepository;
 
   void nameChanged(String value) {
     final name = value;

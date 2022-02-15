@@ -7,16 +7,19 @@ import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hs_mobile_app/app/app.dart';
+import 'package:storage_repository/storage_repository.dart';
 
 part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit({
-    required IAuthenticationRepository authenticationRepository,
     required AppBloc bloc,
-  })  : _authenticationRepository = authenticationRepository,
-        _bloc = bloc,
+    required IAuthenticationRepository authenticationRepository,
+    required IStorageRepository storageRepository,
+  })  : _bloc = bloc,
+        _authenticationRepository = authenticationRepository,
+        _storageRepository = storageRepository,
         super(const ProfileState()) {
     emit(ProfileState(
       isEditing: false,
@@ -35,8 +38,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
   }
 
-  final IAuthenticationRepository _authenticationRepository;
   final AppBloc _bloc;
+  final IAuthenticationRepository _authenticationRepository;
+  final IStorageRepository _storageRepository;
   late final StreamSubscription<AppState> _appBlocSubscription;
 
   /// Handles switching between Static profile view and Editing profile view

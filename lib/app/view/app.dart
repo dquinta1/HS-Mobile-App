@@ -4,20 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hs_mobile_app/app/app.dart';
 import 'package:hs_mobile_app/theme.dart';
+import 'package:storage_repository/storage_repository.dart';
 
 class App extends StatelessWidget {
   const App({
     Key? key,
     required IAuthenticationRepository authenticationRepository,
+    required IStorageRepository storageRepository,
   })  : _authenticationRepository = authenticationRepository,
+        _storageRepository = storageRepository,
         super(key: key);
 
   final IAuthenticationRepository _authenticationRepository;
+  final IStorageRepository _storageRepository;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: _authenticationRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: _authenticationRepository),
+        RepositoryProvider.value(value: _storageRepository),
+      ],
       child: BlocProvider(
         create: (_) => AppBloc(
           authenticationRepository: _authenticationRepository,
