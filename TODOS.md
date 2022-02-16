@@ -2,16 +2,6 @@
 
 ### Data Layer
 
-#### Storage Integration (images) - Storage Repository
-
-- Firebase Storage: Implement [getImageUrl]
-- Firebase Storage: Implement [getImageReference]
-- Firebase Storage: Implement [deleteImage]
-- Mock Storage: Implement [uploadImage]
-- Mock Storage: Implement [getImageUrl]
-- Mock Storage: Implement [getImageReference]
-- Mock Storage: Implement [deleteImage]
-
 #### Firestore Integration - Database Repository
 
 #### HSMap APIs
@@ -26,6 +16,7 @@
 #### Test (BLoCs)
 
 - Sign Up: Image Upload
+- Profile: Edit Profile
 - Profile: Image Upload
 
 ### Presentation Layer
