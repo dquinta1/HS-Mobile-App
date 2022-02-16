@@ -129,10 +129,14 @@ class ProfileCubit extends Cubit<ProfileState> {
   /// using the authentication repository provided
   Future<void> editProfileFormSubmitted() async {
     if (!state.status.isValidated) {
-      // do nothing if form is not validated
-      return;
+      return; // do nothing if form is not validated
     } else {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
+      late final String? _oldPhotoUrl;
+      if (state.photo != null) {
+        // if new avatar uploaded save url of previous
+        _oldPhotoUrl = _bloc.state.user.photo;
+      }
       try {
         await _authenticationRepository.updateUserProfile(
           name: state.name,
@@ -148,6 +152,15 @@ class ProfileCubit extends Cubit<ProfileState> {
         ));
       } catch (_) {
         emit(state.copyWith(status: FormzStatus.submissionFailure));
+      }
+      if (_oldPhotoUrl != null) {
+        try {
+          final _ref =
+              await _storageRepository.getImageReference(url: _oldPhotoUrl);
+          await _storageRepository.deleteImage(reference: _ref);
+        } on Exception catch (e) {
+          print('An Exception was thrown when deleting old avatar: $e');
+        }
       }
     }
   }

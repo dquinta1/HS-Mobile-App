@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
+
 /// {@template i_storage_repository}
 /// File Storage Interface which manages file CRUD operations.
 /// {@endtemplate}
@@ -14,15 +16,15 @@ abstract class IStorageRepository {
   /// Returns [String] url of the uploaded image
   ///
   /// Throws [Exception] if an exception occurs
-  Future<String> getImageUrl({required String reference});
+  Future<String> getImageUrl({required Reference reference});
 
   /// Attempts to get reference to an image provided its [url]
   ///
   /// Throws [Exception] if an exception occurs
-  Future<String> getImageReference({required String url});
+  Future<Reference> getImageReference({required String url});
 
   /// Attempts to delete an uploaded image at [reference]
   ///
   /// Throws [Exception] if an exception occurs
-  Future<void> deleteImage({required String reference});
+  Future<void> deleteImage({required Reference reference});
 }

@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as path;
 import 'package:storage_repository/storage_repository.dart';
 
@@ -29,20 +29,31 @@ class FirebaseStorageRepository implements IStorageRepository {
   }
 
   @override
-  Future<String> getImageUrl({required String reference}) {
-    // TODO: implement getImageUrl
-    throw UnimplementedError();
+  Future<String> getImageUrl({required Reference reference}) async {
+    try {
+      final _url = await reference.getDownloadURL();
+      return _url;
+    } on FirebaseException catch (e) {
+      throw UnimplementedError('Implement ImageStorageException: ${e.message}');
+    }
   }
 
   @override
-  Future<String> getImageReference({required String url}) {
-    // TODO: implement getImageReference
-    throw UnimplementedError();
+  Future<Reference> getImageReference({required String url}) async {
+    try {
+      final _ref = await _firebaseStorage.refFromURL(url);
+      return _ref;
+    } on FirebaseException catch (e) {
+      throw UnimplementedError('Implement ImageStorageException: ${e.message}');
+    }
   }
 
   @override
-  Future<void> deleteImage({required String reference}) {
-    // TODO: implement deleteImage
-    throw UnimplementedError();
+  Future<void> deleteImage({required Reference reference}) async {
+    try {
+      await reference.delete();
+    } on FirebaseException catch (e) {
+      throw UnimplementedError('Implement ImageStorageException: ${e.message}');
+    }
   }
 }
