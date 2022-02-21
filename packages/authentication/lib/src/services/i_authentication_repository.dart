@@ -15,9 +15,9 @@ abstract class IAuthenticationRepository {
   User get currentUser;
 
   /// Creates a new user with the provided [email] and [password].
-  ///
   /// Will update user's display name if provided with [name]
   /// and user's photo uri if provided with [photo]
+  /// 
   /// Throws a [Exception] if an exception occurs.
   Future<void> signUp({
     required String email,
