@@ -5,8 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as path;
 import 'package:storage_repository/storage_repository.dart';
 
-class FirebaseStorageRepository implements IStorageRepository {
-  FirebaseStorageRepository({
+class FirebaseStorage implements IStorageRepository {
+  FirebaseStorage({
     firebase_storage.FirebaseStorage? firebaseStorage,
   }) : _firebaseStorage =
             firebaseStorage ?? firebase_storage.FirebaseStorage.instance;

@@ -1,4 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:blogs_repository/blogs_repository.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,12 +11,15 @@ class App extends StatelessWidget {
   const App({
     Key? key,
     required IAuthenticationRepository authenticationRepository,
+    required IBlogRepository blogRepository,
     required IStorageRepository storageRepository,
   })  : _authenticationRepository = authenticationRepository,
+        _blogRepository = blogRepository,
         _storageRepository = storageRepository,
         super(key: key);
 
   final IAuthenticationRepository _authenticationRepository;
+  final IBlogRepository _blogRepository;
   final IStorageRepository _storageRepository;
 
   @override
@@ -24,6 +28,7 @@ class App extends StatelessWidget {
       providers: [
         RepositoryProvider.value(value: _authenticationRepository),
         RepositoryProvider.value(value: _storageRepository),
+        RepositoryProvider.value(value: _blogRepository),
       ],
       child: BlocProvider(
         create: (_) => AppBloc(
