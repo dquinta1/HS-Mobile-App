@@ -14,6 +14,8 @@ dependencies:
   authentication_repository:
     path: packages/authentication
   bloc: ^8.0.2
+  blogs_repository:
+    path: packages/blogs
   cupertino_icons: ^1.0.2
   data_repository:
     path: packages/data
