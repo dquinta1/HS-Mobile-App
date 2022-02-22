@@ -25,10 +25,12 @@ class NewsView extends StatelessWidget {
       child: BlocBuilder<NewsBloc, NewsState>(
         builder: (context, state) {
           return state.when(
-            loading: () => const CircularProgressIndicator(),
-            refreshing: () => const CircularProgressIndicator(),
-            loadingPages: () => const CircularProgressIndicator(),
-            blogs: (blogs) => NewsList(blogs: blogs),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            blogs: (refreshing, fetchingMore, blogs) => NewsList(
+              refreshing: refreshing,
+              fetchingMore: fetchingMore,
+              blogs: blogs,
+            ),
             details: (blog) => NewsDetails(blog: blog),
             error: (error) => const Center(child: Text('Error')),
           );

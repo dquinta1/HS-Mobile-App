@@ -25,12 +25,16 @@ class _$NewsEventTearOff {
     return const Refresh();
   }
 
-  FetchMore fetchMore() {
-    return const FetchMore();
+  FetchMore fetchMore(int index) {
+    return FetchMore(
+      index,
+    );
   }
 
-  SeeDetails seeDetails() {
-    return const SeeDetails();
+  SeeDetails seeDetails(String id) {
+    return SeeDetails(
+      id,
+    );
   }
 }
 
@@ -43,24 +47,24 @@ mixin _$NewsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function() refresh,
-    required TResult Function() fetchMore,
-    required TResult Function() seeDetails,
+    required TResult Function(int index) fetchMore,
+    required TResult Function(String id) seeDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,8 +150,8 @@ class _$Fetch implements Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function() refresh,
-    required TResult Function() fetchMore,
-    required TResult Function() seeDetails,
+    required TResult Function(int index) fetchMore,
+    required TResult Function(String id) seeDetails,
   }) {
     return fetch();
   }
@@ -157,8 +161,8 @@ class _$Fetch implements Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
   }) {
     return fetch?.call();
   }
@@ -168,8 +172,8 @@ class _$Fetch implements Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -260,8 +264,8 @@ class _$Refresh implements Refresh {
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function() refresh,
-    required TResult Function() fetchMore,
-    required TResult Function() seeDetails,
+    required TResult Function(int index) fetchMore,
+    required TResult Function(String id) seeDetails,
   }) {
     return refresh();
   }
@@ -271,8 +275,8 @@ class _$Refresh implements Refresh {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
   }) {
     return refresh?.call();
   }
@@ -282,8 +286,8 @@ class _$Refresh implements Refresh {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -338,6 +342,7 @@ abstract class Refresh implements NewsEvent {
 abstract class $FetchMoreCopyWith<$Res> {
   factory $FetchMoreCopyWith(FetchMore value, $Res Function(FetchMore) then) =
       _$FetchMoreCopyWithImpl<$Res>;
+  $Res call({int index});
 }
 
 /// @nodoc
@@ -348,36 +353,59 @@ class _$FetchMoreCopyWithImpl<$Res> extends _$NewsEventCopyWithImpl<$Res>
 
   @override
   FetchMore get _value => super._value as FetchMore;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(FetchMore(
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$FetchMore implements FetchMore {
-  const _$FetchMore();
+  const _$FetchMore(this.index);
+
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'NewsEvent.fetchMore()';
+    return 'NewsEvent.fetchMore(index: $index)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is FetchMore);
+        (other.runtimeType == runtimeType &&
+            other is FetchMore &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(index));
+
+  @JsonKey(ignore: true)
+  @override
+  $FetchMoreCopyWith<FetchMore> get copyWith =>
+      _$FetchMoreCopyWithImpl<FetchMore>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function() refresh,
-    required TResult Function() fetchMore,
-    required TResult Function() seeDetails,
+    required TResult Function(int index) fetchMore,
+    required TResult Function(String id) seeDetails,
   }) {
-    return fetchMore();
+    return fetchMore(index);
   }
 
   @override
@@ -385,10 +413,10 @@ class _$FetchMore implements FetchMore {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
   }) {
-    return fetchMore?.call();
+    return fetchMore?.call(index);
   }
 
   @override
@@ -396,12 +424,12 @@ class _$FetchMore implements FetchMore {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
     required TResult orElse(),
   }) {
     if (fetchMore != null) {
-      return fetchMore();
+      return fetchMore(index);
     }
     return orElse();
   }
@@ -445,7 +473,12 @@ class _$FetchMore implements FetchMore {
 }
 
 abstract class FetchMore implements NewsEvent {
-  const factory FetchMore() = _$FetchMore;
+  const factory FetchMore(int index) = _$FetchMore;
+
+  int get index;
+  @JsonKey(ignore: true)
+  $FetchMoreCopyWith<FetchMore> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -453,6 +486,7 @@ abstract class $SeeDetailsCopyWith<$Res> {
   factory $SeeDetailsCopyWith(
           SeeDetails value, $Res Function(SeeDetails) then) =
       _$SeeDetailsCopyWithImpl<$Res>;
+  $Res call({String id});
 }
 
 /// @nodoc
@@ -463,36 +497,59 @@ class _$SeeDetailsCopyWithImpl<$Res> extends _$NewsEventCopyWithImpl<$Res>
 
   @override
   SeeDetails get _value => super._value as SeeDetails;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(SeeDetails(
+      id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SeeDetails implements SeeDetails {
-  const _$SeeDetails();
+  const _$SeeDetails(this.id);
+
+  @override
+  final String id;
 
   @override
   String toString() {
-    return 'NewsEvent.seeDetails()';
+    return 'NewsEvent.seeDetails(id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is SeeDetails);
+        (other.runtimeType == runtimeType &&
+            other is SeeDetails &&
+            const DeepCollectionEquality().equals(other.id, id));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+
+  @JsonKey(ignore: true)
+  @override
+  $SeeDetailsCopyWith<SeeDetails> get copyWith =>
+      _$SeeDetailsCopyWithImpl<SeeDetails>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function() refresh,
-    required TResult Function() fetchMore,
-    required TResult Function() seeDetails,
+    required TResult Function(int index) fetchMore,
+    required TResult Function(String id) seeDetails,
   }) {
-    return seeDetails();
+    return seeDetails(id);
   }
 
   @override
@@ -500,10 +557,10 @@ class _$SeeDetails implements SeeDetails {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
   }) {
-    return seeDetails?.call();
+    return seeDetails?.call(id);
   }
 
   @override
@@ -511,12 +568,12 @@ class _$SeeDetails implements SeeDetails {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function()? refresh,
-    TResult Function()? fetchMore,
-    TResult Function()? seeDetails,
+    TResult Function(int index)? fetchMore,
+    TResult Function(String id)? seeDetails,
     required TResult orElse(),
   }) {
     if (seeDetails != null) {
-      return seeDetails();
+      return seeDetails(id);
     }
     return orElse();
   }
@@ -560,7 +617,12 @@ class _$SeeDetails implements SeeDetails {
 }
 
 abstract class SeeDetails implements NewsEvent {
-  const factory SeeDetails() = _$SeeDetails;
+  const factory SeeDetails(String id) = _$SeeDetails;
+
+  String get id;
+  @JsonKey(ignore: true)
+  $SeeDetailsCopyWith<SeeDetails> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -571,16 +633,13 @@ class _$NewsStateTearOff {
     return const Loading();
   }
 
-  Refreshing refreshing() {
-    return const Refreshing();
-  }
-
-  LoadingPages loadingPages() {
-    return const LoadingPages();
-  }
-
-  Blogs blogs({required List<Blog>? blogs}) {
+  Blogs blogs(
+      {bool refreshing = false,
+      bool fetchingMore = false,
+      required List<Blog>? blogs}) {
     return Blogs(
+      refreshing: refreshing,
+      fetchingMore: fetchingMore,
       blogs: blogs,
     );
   }
@@ -591,9 +650,9 @@ class _$NewsStateTearOff {
     );
   }
 
-  ErrorState error({required Error? error}) {
+  ErrorState error({required BlogFailure? e}) {
     return ErrorState(
-      error: error,
+      e: e,
     );
   }
 }
@@ -606,39 +665,35 @@ mixin _$NewsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() refreshing,
-    required TResult Function() loadingPages,
-    required TResult Function(List<Blog>? blogs) blogs,
+    required TResult Function(
+            bool refreshing, bool fetchingMore, List<Blog>? blogs)
+        blogs,
     required TResult Function(Blog? blog) details,
-    required TResult Function(Error? error) error,
+    required TResult Function(BlogFailure? e) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
-    required TResult Function(Refreshing value) refreshing,
-    required TResult Function(LoadingPages value) loadingPages,
     required TResult Function(Blogs value) blogs,
     required TResult Function(Details value) details,
     required TResult Function(ErrorState value) error,
@@ -647,8 +702,6 @@ mixin _$NewsState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -657,8 +710,6 @@ mixin _$NewsState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -721,11 +772,11 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() refreshing,
-    required TResult Function() loadingPages,
-    required TResult Function(List<Blog>? blogs) blogs,
+    required TResult Function(
+            bool refreshing, bool fetchingMore, List<Blog>? blogs)
+        blogs,
     required TResult Function(Blog? blog) details,
-    required TResult Function(Error? error) error,
+    required TResult Function(BlogFailure? e) error,
   }) {
     return loading();
   }
@@ -734,11 +785,10 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
   }) {
     return loading?.call();
   }
@@ -747,11 +797,10 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -764,8 +813,6 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
-    required TResult Function(Refreshing value) refreshing,
-    required TResult Function(LoadingPages value) loadingPages,
     required TResult Function(Blogs value) blogs,
     required TResult Function(Details value) details,
     required TResult Function(ErrorState value) error,
@@ -777,8 +824,6 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -790,8 +835,6 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -809,265 +852,10 @@ abstract class Loading implements NewsState {
 }
 
 /// @nodoc
-abstract class $RefreshingCopyWith<$Res> {
-  factory $RefreshingCopyWith(
-          Refreshing value, $Res Function(Refreshing) then) =
-      _$RefreshingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$RefreshingCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
-    implements $RefreshingCopyWith<$Res> {
-  _$RefreshingCopyWithImpl(Refreshing _value, $Res Function(Refreshing) _then)
-      : super(_value, (v) => _then(v as Refreshing));
-
-  @override
-  Refreshing get _value => super._value as Refreshing;
-}
-
-/// @nodoc
-
-class _$Refreshing implements Refreshing {
-  const _$Refreshing();
-
-  @override
-  String toString() {
-    return 'NewsState.refreshing()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Refreshing);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() refreshing,
-    required TResult Function() loadingPages,
-    required TResult Function(List<Blog>? blogs) blogs,
-    required TResult Function(Blog? blog) details,
-    required TResult Function(Error? error) error,
-  }) {
-    return refreshing();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
-    TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
-  }) {
-    return refreshing?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
-    TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
-    required TResult orElse(),
-  }) {
-    if (refreshing != null) {
-      return refreshing();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Loading value) loading,
-    required TResult Function(Refreshing value) refreshing,
-    required TResult Function(LoadingPages value) loadingPages,
-    required TResult Function(Blogs value) blogs,
-    required TResult Function(Details value) details,
-    required TResult Function(ErrorState value) error,
-  }) {
-    return refreshing(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
-    TResult Function(Blogs value)? blogs,
-    TResult Function(Details value)? details,
-    TResult Function(ErrorState value)? error,
-  }) {
-    return refreshing?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
-    TResult Function(Blogs value)? blogs,
-    TResult Function(Details value)? details,
-    TResult Function(ErrorState value)? error,
-    required TResult orElse(),
-  }) {
-    if (refreshing != null) {
-      return refreshing(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Refreshing implements NewsState {
-  const factory Refreshing() = _$Refreshing;
-}
-
-/// @nodoc
-abstract class $LoadingPagesCopyWith<$Res> {
-  factory $LoadingPagesCopyWith(
-          LoadingPages value, $Res Function(LoadingPages) then) =
-      _$LoadingPagesCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$LoadingPagesCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
-    implements $LoadingPagesCopyWith<$Res> {
-  _$LoadingPagesCopyWithImpl(
-      LoadingPages _value, $Res Function(LoadingPages) _then)
-      : super(_value, (v) => _then(v as LoadingPages));
-
-  @override
-  LoadingPages get _value => super._value as LoadingPages;
-}
-
-/// @nodoc
-
-class _$LoadingPages implements LoadingPages {
-  const _$LoadingPages();
-
-  @override
-  String toString() {
-    return 'NewsState.loadingPages()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is LoadingPages);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() refreshing,
-    required TResult Function() loadingPages,
-    required TResult Function(List<Blog>? blogs) blogs,
-    required TResult Function(Blog? blog) details,
-    required TResult Function(Error? error) error,
-  }) {
-    return loadingPages();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
-    TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
-  }) {
-    return loadingPages?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
-    TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
-    required TResult orElse(),
-  }) {
-    if (loadingPages != null) {
-      return loadingPages();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Loading value) loading,
-    required TResult Function(Refreshing value) refreshing,
-    required TResult Function(LoadingPages value) loadingPages,
-    required TResult Function(Blogs value) blogs,
-    required TResult Function(Details value) details,
-    required TResult Function(ErrorState value) error,
-  }) {
-    return loadingPages(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
-    TResult Function(Blogs value)? blogs,
-    TResult Function(Details value)? details,
-    TResult Function(ErrorState value)? error,
-  }) {
-    return loadingPages?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
-    TResult Function(Blogs value)? blogs,
-    TResult Function(Details value)? details,
-    TResult Function(ErrorState value)? error,
-    required TResult orElse(),
-  }) {
-    if (loadingPages != null) {
-      return loadingPages(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadingPages implements NewsState {
-  const factory LoadingPages() = _$LoadingPages;
-}
-
-/// @nodoc
 abstract class $BlogsCopyWith<$Res> {
   factory $BlogsCopyWith(Blogs value, $Res Function(Blogs) then) =
       _$BlogsCopyWithImpl<$Res>;
-  $Res call({List<Blog>? blogs});
+  $Res call({bool refreshing, bool fetchingMore, List<Blog>? blogs});
 }
 
 /// @nodoc
@@ -1081,9 +869,19 @@ class _$BlogsCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? refreshing = freezed,
+    Object? fetchingMore = freezed,
     Object? blogs = freezed,
   }) {
     return _then(Blogs(
+      refreshing: refreshing == freezed
+          ? _value.refreshing
+          : refreshing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      fetchingMore: fetchingMore == freezed
+          ? _value.fetchingMore
+          : fetchingMore // ignore: cast_nullable_to_non_nullable
+              as bool,
       blogs: blogs == freezed
           ? _value.blogs
           : blogs // ignore: cast_nullable_to_non_nullable
@@ -1095,14 +893,23 @@ class _$BlogsCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Blogs implements Blogs {
-  const _$Blogs({required this.blogs});
+  const _$Blogs(
+      {this.refreshing = false,
+      this.fetchingMore = false,
+      required this.blogs});
 
+  @JsonKey()
+  @override
+  final bool refreshing;
+  @JsonKey()
+  @override
+  final bool fetchingMore;
   @override
   final List<Blog>? blogs;
 
   @override
   String toString() {
-    return 'NewsState.blogs(blogs: $blogs)';
+    return 'NewsState.blogs(refreshing: $refreshing, fetchingMore: $fetchingMore, blogs: $blogs)';
   }
 
   @override
@@ -1110,12 +917,19 @@ class _$Blogs implements Blogs {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Blogs &&
+            const DeepCollectionEquality()
+                .equals(other.refreshing, refreshing) &&
+            const DeepCollectionEquality()
+                .equals(other.fetchingMore, fetchingMore) &&
             const DeepCollectionEquality().equals(other.blogs, blogs));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(blogs));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(refreshing),
+      const DeepCollectionEquality().hash(fetchingMore),
+      const DeepCollectionEquality().hash(blogs));
 
   @JsonKey(ignore: true)
   @override
@@ -1126,41 +940,39 @@ class _$Blogs implements Blogs {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() refreshing,
-    required TResult Function() loadingPages,
-    required TResult Function(List<Blog>? blogs) blogs,
+    required TResult Function(
+            bool refreshing, bool fetchingMore, List<Blog>? blogs)
+        blogs,
     required TResult Function(Blog? blog) details,
-    required TResult Function(Error? error) error,
+    required TResult Function(BlogFailure? e) error,
   }) {
-    return blogs(this.blogs);
+    return blogs(refreshing, fetchingMore, this.blogs);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
   }) {
-    return blogs?.call(this.blogs);
+    return blogs?.call(refreshing, fetchingMore, this.blogs);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
     required TResult orElse(),
   }) {
     if (blogs != null) {
-      return blogs(this.blogs);
+      return blogs(refreshing, fetchingMore, this.blogs);
     }
     return orElse();
   }
@@ -1169,8 +981,6 @@ class _$Blogs implements Blogs {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
-    required TResult Function(Refreshing value) refreshing,
-    required TResult Function(LoadingPages value) loadingPages,
     required TResult Function(Blogs value) blogs,
     required TResult Function(Details value) details,
     required TResult Function(ErrorState value) error,
@@ -1182,8 +992,6 @@ class _$Blogs implements Blogs {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -1195,8 +1003,6 @@ class _$Blogs implements Blogs {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -1210,8 +1016,13 @@ class _$Blogs implements Blogs {
 }
 
 abstract class Blogs implements NewsState {
-  const factory Blogs({required List<Blog>? blogs}) = _$Blogs;
+  const factory Blogs(
+      {bool refreshing,
+      bool fetchingMore,
+      required List<Blog>? blogs}) = _$Blogs;
 
+  bool get refreshing;
+  bool get fetchingMore;
   List<Blog>? get blogs;
   @JsonKey(ignore: true)
   $BlogsCopyWith<Blogs> get copyWith => throw _privateConstructorUsedError;
@@ -1222,6 +1033,8 @@ abstract class $DetailsCopyWith<$Res> {
   factory $DetailsCopyWith(Details value, $Res Function(Details) then) =
       _$DetailsCopyWithImpl<$Res>;
   $Res call({Blog? blog});
+
+  $BlogCopyWith<$Res>? get blog;
 }
 
 /// @nodoc
@@ -1243,6 +1056,17 @@ class _$DetailsCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
           : blog // ignore: cast_nullable_to_non_nullable
               as Blog?,
     ));
+  }
+
+  @override
+  $BlogCopyWith<$Res>? get blog {
+    if (_value.blog == null) {
+      return null;
+    }
+
+    return $BlogCopyWith<$Res>(_value.blog!, (value) {
+      return _then(_value.copyWith(blog: value));
+    });
   }
 }
 
@@ -1280,11 +1104,11 @@ class _$Details implements Details {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() refreshing,
-    required TResult Function() loadingPages,
-    required TResult Function(List<Blog>? blogs) blogs,
+    required TResult Function(
+            bool refreshing, bool fetchingMore, List<Blog>? blogs)
+        blogs,
     required TResult Function(Blog? blog) details,
-    required TResult Function(Error? error) error,
+    required TResult Function(BlogFailure? e) error,
   }) {
     return details(blog);
   }
@@ -1293,11 +1117,10 @@ class _$Details implements Details {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
   }) {
     return details?.call(blog);
   }
@@ -1306,11 +1129,10 @@ class _$Details implements Details {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
     required TResult orElse(),
   }) {
     if (details != null) {
@@ -1323,8 +1145,6 @@ class _$Details implements Details {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
-    required TResult Function(Refreshing value) refreshing,
-    required TResult Function(LoadingPages value) loadingPages,
     required TResult Function(Blogs value) blogs,
     required TResult Function(Details value) details,
     required TResult Function(ErrorState value) error,
@@ -1336,8 +1156,6 @@ class _$Details implements Details {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -1349,8 +1167,6 @@ class _$Details implements Details {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -1376,7 +1192,7 @@ abstract class $ErrorStateCopyWith<$Res> {
   factory $ErrorStateCopyWith(
           ErrorState value, $Res Function(ErrorState) then) =
       _$ErrorStateCopyWithImpl<$Res>;
-  $Res call({Error? error});
+  $Res call({BlogFailure? e});
 }
 
 /// @nodoc
@@ -1390,13 +1206,13 @@ class _$ErrorStateCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? error = freezed,
+    Object? e = freezed,
   }) {
     return _then(ErrorState(
-      error: error == freezed
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as Error?,
+      e: e == freezed
+          ? _value.e
+          : e // ignore: cast_nullable_to_non_nullable
+              as BlogFailure?,
     ));
   }
 }
@@ -1404,14 +1220,14 @@ class _$ErrorStateCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorState implements ErrorState {
-  const _$ErrorState({required this.error});
+  const _$ErrorState({required this.e});
 
   @override
-  final Error? error;
+  final BlogFailure? e;
 
   @override
   String toString() {
-    return 'NewsState.error(error: $error)';
+    return 'NewsState.error(e: $e)';
   }
 
   @override
@@ -1419,12 +1235,12 @@ class _$ErrorState implements ErrorState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ErrorState &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.e, e));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(e));
 
   @JsonKey(ignore: true)
   @override
@@ -1435,41 +1251,39 @@ class _$ErrorState implements ErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() refreshing,
-    required TResult Function() loadingPages,
-    required TResult Function(List<Blog>? blogs) blogs,
+    required TResult Function(
+            bool refreshing, bool fetchingMore, List<Blog>? blogs)
+        blogs,
     required TResult Function(Blog? blog) details,
-    required TResult Function(Error? error) error,
+    required TResult Function(BlogFailure? e) error,
   }) {
-    return error(this.error);
+    return error(e);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
   }) {
-    return error?.call(this.error);
+    return error?.call(e);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function()? loadingPages,
-    TResult Function(List<Blog>? blogs)? blogs,
+    TResult Function(bool refreshing, bool fetchingMore, List<Blog>? blogs)?
+        blogs,
     TResult Function(Blog? blog)? details,
-    TResult Function(Error? error)? error,
+    TResult Function(BlogFailure? e)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(e);
     }
     return orElse();
   }
@@ -1478,8 +1292,6 @@ class _$ErrorState implements ErrorState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
-    required TResult Function(Refreshing value) refreshing,
-    required TResult Function(LoadingPages value) loadingPages,
     required TResult Function(Blogs value) blogs,
     required TResult Function(Details value) details,
     required TResult Function(ErrorState value) error,
@@ -1491,8 +1303,6 @@ class _$ErrorState implements ErrorState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -1504,8 +1314,6 @@ class _$ErrorState implements ErrorState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
-    TResult Function(Refreshing value)? refreshing,
-    TResult Function(LoadingPages value)? loadingPages,
     TResult Function(Blogs value)? blogs,
     TResult Function(Details value)? details,
     TResult Function(ErrorState value)? error,
@@ -1519,9 +1327,9 @@ class _$ErrorState implements ErrorState {
 }
 
 abstract class ErrorState implements NewsState {
-  const factory ErrorState({required Error? error}) = _$ErrorState;
+  const factory ErrorState({required BlogFailure? e}) = _$ErrorState;
 
-  Error? get error;
+  BlogFailure? get e;
   @JsonKey(ignore: true)
   $ErrorStateCopyWith<ErrorState> get copyWith =>
       throw _privateConstructorUsedError;
