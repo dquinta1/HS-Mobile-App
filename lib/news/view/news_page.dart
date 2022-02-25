@@ -14,28 +14,3 @@ class NewsPage extends StatelessWidget {
     );
   }
 }
-
-class NewsView extends StatelessWidget {
-  const NewsView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: BlocBuilder<NewsBloc, NewsState>(
-        builder: (context, state) {
-          return state.when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            blogs: (refreshing, fetchingMore, blogs) => NewsList(
-              refreshing: refreshing,
-              fetchingMore: fetchingMore,
-              blogs: blogs,
-            ),
-            details: (blog) => NewsDetails(blog: blog),
-            error: (error) => const Center(child: Text('Error')),
-          );
-        },
-      ),
-    );
-  }
-}

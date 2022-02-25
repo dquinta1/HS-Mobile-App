@@ -7,8 +7,8 @@ class MockBlog implements IBlogRepository {
       return List<Blog>.generate(10, (index) {
         return Blog(
           id: index.toString(),
-          title: 'Blog #$index',
-          author: 'Anonymus',
+          title: 'Blog Title: (Blog #$index)',
+          author: 'Author Name',
           date: DateTime.now(),
           photo: 'https://picsum.photos/800',
         );
@@ -21,8 +21,8 @@ class MockBlog implements IBlogRepository {
     return Future.delayed(Duration(milliseconds: 400), () {
       return Blog(
         id: id,
-        title: 'Blog with ID: $id',
-        author: 'Anonymus',
+        title: 'Blog Title: (ID: $id)',
+        author: 'Author Name',
         date: DateTime.now(),
         photo: 'https://picsum.photos/800',
         body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' +
