@@ -8,8 +8,8 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NewsBloc>(
-      create: (_) => NewsBloc(blogRepository: context.read<IBlogRepository>()),
+    return BlocProvider<NewsCubit>(
+      create: (_) => NewsCubit(blogRepository: context.read<IBlogRepository>()),
       child: const NewsView(),
     );
   }

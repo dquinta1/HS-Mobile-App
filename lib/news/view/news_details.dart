@@ -6,19 +6,35 @@ class NewsDetails extends StatelessWidget {
       : _blog = blog,
         super(key: key);
 
+  static Route route(Blog? blog) {
+    return MaterialPageRoute<void>(builder: (_) => NewsDetails(blog: blog));
+  }
+
   final Blog? _blog;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      extendBodyBehindAppBar: true,
-      body: Center(child: Text(_blog!.title)),
+      body: SafeArea(
+          child: Stack(
+        children: [
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(),
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              primary: Colors.black,
+            ),
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+          if (_blog == null)
+            const Center(child: Text('This Blog is Empty'))
+          else
+            Center(child: Text(_blog!.title))
+        ],
+      )),
     );
   }
 }
