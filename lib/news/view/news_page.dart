@@ -8,32 +8,9 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NewsBloc>(
-      create: (_) => NewsBloc(blogRepository: context.read<IBlogRepository>()),
+    return BlocProvider<NewsCubit>(
+      create: (_) => NewsCubit(blogRepository: context.read<IBlogRepository>()),
       child: const NewsView(),
-    );
-  }
-}
-
-class NewsView extends StatelessWidget {
-  const NewsView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: BlocBuilder<NewsBloc, NewsState>(
-        builder: (context, state) {
-          return state.when(
-            loading: () => const CircularProgressIndicator(),
-            refreshing: () => const CircularProgressIndicator(),
-            loadingPages: () => const CircularProgressIndicator(),
-            blogs: (blogs) => NewsList(blogs: blogs),
-            details: (blog) => NewsDetails(blog: blog),
-            error: (error) => const Center(child: Text('Error')),
-          );
-        },
-      ),
     );
   }
 }
