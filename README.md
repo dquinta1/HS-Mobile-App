@@ -18,4 +18,4 @@ There is a TODOS.md file that contains all the currently active tasks. Resolving
 
 When taking on a specific task create a new branch that resembles that task and do not modify the TODOS.md, this will be done by the repo owner after the PR is reviewed, merged and the task is confirmed to have been resolved.
 
-##### Note:Make sure the environment is set to 'dev' on env_config.dart otherwise the app might crash due to missing api keys. Alternatively you may create your own personal projects and use those API keys by specifying them in the .env file as required by main.dart.
+##### Note: Make sure the environment is set to 'dev' on env_config.dart otherwise the app might crash due to missing api keys. Alternatively you may create your own personal projects and use those API keys by specifying them in the .env file as required by main.dart.
