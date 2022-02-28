@@ -17,8 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HomeStateTearOff {
   const _$HomeStateTearOff();
 
-  _Initial initial() {
-    return const _Initial();
+  _HomeState call({String? name, String? photo, String? location}) {
+    return _HomeState(
+      name: name,
+      photo: photo,
+      location: location,
+    );
   }
 }
 
@@ -27,37 +31,12 @@ const $HomeState = _$HomeStateTearOff();
 
 /// @nodoc
 mixin _$HomeState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    required TResult orElse(),
-  }) =>
+  String? get name => throw _privateConstructorUsedError;
+  String? get photo => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $HomeStateCopyWith<HomeState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -65,6 +44,7 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
+  $Res call({String? name, String? photo, String? location});
 }
 
 /// @nodoc
@@ -74,100 +54,123 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   final HomeState _value;
   // ignore: unused_field
   final $Res Function(HomeState) _then;
-}
-
-/// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
 
   @override
-  _Initial get _value => super._value as _Initial;
+  $Res call({
+    Object? name = freezed,
+    Object? photo = freezed,
+    Object? location = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photo: photo == freezed
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory _$HomeStateCopyWith(
+          _HomeState value, $Res Function(_HomeState) then) =
+      __$HomeStateCopyWithImpl<$Res>;
+  @override
+  $Res call({String? name, String? photo, String? location});
+}
+
+/// @nodoc
+class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+    implements _$HomeStateCopyWith<$Res> {
+  __$HomeStateCopyWithImpl(_HomeState _value, $Res Function(_HomeState) _then)
+      : super(_value, (v) => _then(v as _HomeState));
+
+  @override
+  _HomeState get _value => super._value as _HomeState;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? photo = freezed,
+    Object? location = freezed,
+  }) {
+    return _then(_HomeState(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photo: photo == freezed
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_HomeState implements _HomeState {
+  const _$_HomeState({this.name, this.photo, this.location});
+
+  @override
+  final String? name;
+  @override
+  final String? photo;
+  @override
+  final String? location;
 
   @override
   String toString() {
-    return 'HomeState.initial()';
+    return 'HomeState(name: $name, photo: $photo, location: $location)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Initial);
+        (other.runtimeType == runtimeType &&
+            other is _HomeState &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.photo, photo) &&
+            const DeepCollectionEquality().equals(other.location, location));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(photo),
+      const DeepCollectionEquality().hash(location));
 
+  @JsonKey(ignore: true)
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
+  _$HomeStateCopyWith<_HomeState> get copyWith =>
+      __$HomeStateCopyWithImpl<_HomeState>(this, _$identity);
 }
 
-abstract class _Initial implements HomeState {
-  const factory _Initial() = _$_Initial;
+abstract class _HomeState implements HomeState {
+  const factory _HomeState({String? name, String? photo, String? location}) =
+      _$_HomeState;
+
+  @override
+  String? get name;
+  @override
+  String? get photo;
+  @override
+  String? get location;
+  @override
+  @JsonKey(ignore: true)
+  _$HomeStateCopyWith<_HomeState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
