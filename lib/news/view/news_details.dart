@@ -1,5 +1,6 @@
 import 'package:blogs_repository/blogs_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewsDetails extends StatelessWidget {
   const NewsDetails({Key? key, required Blog? blog})
@@ -18,6 +19,16 @@ class NewsDetails extends StatelessWidget {
       body: SafeArea(
           child: Stack(
         children: [
+          if (_blog == null)
+            const Center(child: Text('This Blog is Empty'))
+          else
+            _BlogDetails(
+              author: _blog!.author,
+              body: _blog!.body,
+              photo: _blog!.photo,
+              title: _blog!.title,
+              date: _blog!.date,
+            ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(),
             style: ElevatedButton.styleFrom(
@@ -29,12 +40,112 @@ class NewsDetails extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          if (_blog == null)
-            const Center(child: Text('This Blog is Empty'))
-          else
-            Center(child: Text(_blog!.title))
         ],
       )),
+    );
+  }
+}
+
+class _BlogDetails extends StatelessWidget {
+  const _BlogDetails({
+    Key? key,
+    String? author,
+    String? body,
+    String? photo,
+    required String title,
+    required DateTime date,
+  })  : _author = author,
+        _body = body,
+        _photo = photo,
+        _title = title,
+        _date = date,
+        super(key: key);
+
+  final String? _author;
+  final String? _body;
+  final String? _photo;
+  final String _title;
+  final DateTime _date;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          if (_photo == null)
+            Container()
+          else
+            Image.network(
+              _photo!,
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                }
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              },
+            ),
+          Padding(
+            padding: const EdgeInsets.all(6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      _title,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 24,
+                      ),
+                    ),
+                    Expanded(child: Container()),
+                    Text(
+                      DateFormat.yMMM().format(_date),
+                      textAlign: TextAlign.end,
+                      style: const TextStyle(fontSize: 18, color: Colors.grey),
+                    )
+                  ],
+                ),
+                if (_body == null)
+                  const Center(
+                    child: Text('This Blog has no body'),
+                  )
+                else
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(4, 4, 4, 8),
+                    child: Text(
+                        _body! + _body! + _body! + _body! + _body! + _body!),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(4, 4, 6, 8),
+                  child: Row(
+                    children: [
+                      Expanded(child: Container()),
+                      Text(
+                        _author == null ? 'by Anonymous' : 'by $_author',
+                        textAlign: TextAlign.end,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

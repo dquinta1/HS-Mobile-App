@@ -30,6 +30,7 @@ class NewsCubit extends Cubit<NewsState> {
     emit(state.copyWith(refreshing: true));
     try {
       final blogs = await _blogRepository.getBlogs();
+
       emit(state.copyWith(refreshing: false, blogs: blogs));
     } on BlogFailure catch (e) {
       emit(state.copyWith(errorMessage: e.message));

@@ -21,51 +21,62 @@ class _NewsViewState extends State<NewsView> {
 
   @override
   Widget build(BuildContext newsContext) {
-    return Padding(
-      padding: const EdgeInsets.all(2),
-      child: BlocListener<NewsCubit, NewsState>(
-        listener: (context, state) {
-          if (state.loading) {
-            setState(() {
-              _child = const Center(child: CircularProgressIndicator());
-            });
-          } else if (state.errorMessage != null) {
-            setState(() {
-              _child = Center(child: Text(state.errorMessage!));
-            });
-          } else if (state.blogs == null) {
-            setState(() {
-              _child = const Center(
-                child: Text('No Blogs to Show'),
-              );
-            });
-          } else {
-            setState(() {
-              _child = ListView.builder(
-                itemCount: state.blogs!.length,
-                itemBuilder: (context, index) {
-                  return _BlogCard(
-                    title: state.blogs![index].title,
-                    author: state.blogs![index].author,
-                    photo: state.blogs![index].photo,
-                    date: state.blogs![index].date,
-                    onClick: () async {
-                      final blog = await context
-                          .read<NewsCubit>()
-                          .seeDetails(state.blogs![index].id);
-                      if (blog != null) {
-                        // ignore: unawaited_futures, use_build_context_synchronously
-                        Navigator.of(newsContext)
-                            .push<void>(NewsDetails.route(blog));
-                      }
-                    },
-                  );
-                },
-              );
-            });
-          }
-        },
-        child: _child,
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(2),
+        child: BlocListener<NewsCubit, NewsState>(
+          listener: (context, state) {
+            //? state.refreshing here is just for testing purposes
+            // TODO: remove the OR state.refreshing clause 
+            if (state.loading || state.refreshing ) {
+              setState(() {
+                _child = const Center(child: CircularProgressIndicator());
+              });
+            } else if (state.errorMessage != null) {
+              setState(() {
+                _child = Center(child: Text(state.errorMessage!));
+              });
+            } else if (state.blogs == null) {
+              setState(() {
+                _child = const Center(
+                  child: Text('No Blogs to Show'),
+                );
+              });
+            } else {
+              setState(() {
+                _child = ListView.builder(
+                  itemCount: state.blogs!.length,
+                  itemBuilder: (context, index) {
+                    return _BlogCard(
+                      title: state.blogs![index].title,
+                      author: state.blogs![index].author,
+                      photo: state.blogs![index].photo,
+                      date: state.blogs![index].date,
+                      onClick: () async {
+                        final blog = await context
+                            .read<NewsCubit>()
+                            .seeDetails(state.blogs![index].id);
+                        if (blog != null) {
+                          // ignore: unawaited_futures, use_build_context_synchronously
+                          Navigator.of(newsContext)
+                              .push<void>(NewsDetails.route(blog));
+                        }
+                      },
+                    );
+                  },
+                );
+              });
+            }
+          },
+          child: _child,
+        ),
+      ),
+      //? this FAB is just for testing purposes, refresh functionality is 
+      //? governed by the scrollController
+      //TODO: remove this FAB
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.read<NewsCubit>().refresh(),
+        child: const Icon(Icons.refresh),
       ),
     );
   }
@@ -100,13 +111,27 @@ class _BlogCard extends StatelessWidget {
       child: Card(
         child: Column(
           children: [
-            Image(
-              image: _photo == null
-                  //? replace line below with a fixed image placeholder
-                  ? const NetworkImage('https://picsum.photos/800')
-                  //TODO: dynamically show 'loading' while image is being fetched
-                  : NetworkImage(_photo!),
-            ),
+            if (_photo == null)
+              //? replace line below with a fixed image placeholder
+              Image.network('https://picsum.photos/800')
+            else
+              Image.network(
+                _photo!,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
+                    ),
+                  );
+                },
+              ),
             Padding(
               padding: const EdgeInsets.all(8),
               child: Row(
