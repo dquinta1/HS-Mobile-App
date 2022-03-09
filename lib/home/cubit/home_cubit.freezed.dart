@@ -24,7 +24,8 @@ class _$HomeStateTearOff {
       String? country,
       int? covidCases,
       String? selectedCountry,
-      List<String>? countryList}) {
+      List<String>? countryList,
+      bool locationLoading = false}) {
     return _HomeState(
       name: name,
       photo: photo,
@@ -33,6 +34,7 @@ class _$HomeStateTearOff {
       covidCases: covidCases,
       selectedCountry: selectedCountry,
       countryList: countryList,
+      locationLoading: locationLoading,
     );
   }
 }
@@ -49,6 +51,7 @@ mixin _$HomeState {
   int? get covidCases => throw _privateConstructorUsedError;
   String? get selectedCountry => throw _privateConstructorUsedError;
   List<String>? get countryList => throw _privateConstructorUsedError;
+  bool get locationLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -66,7 +69,8 @@ abstract class $HomeStateCopyWith<$Res> {
       String? country,
       int? covidCases,
       String? selectedCountry,
-      List<String>? countryList});
+      List<String>? countryList,
+      bool locationLoading});
 }
 
 /// @nodoc
@@ -86,6 +90,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
     Object? covidCases = freezed,
     Object? selectedCountry = freezed,
     Object? countryList = freezed,
+    Object? locationLoading = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -116,6 +121,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _value.countryList
           : countryList // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      locationLoading: locationLoading == freezed
+          ? _value.locationLoading
+          : locationLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -133,7 +142,8 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       String? country,
       int? covidCases,
       String? selectedCountry,
-      List<String>? countryList});
+      List<String>? countryList,
+      bool locationLoading});
 }
 
 /// @nodoc
@@ -154,6 +164,7 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? covidCases = freezed,
     Object? selectedCountry = freezed,
     Object? countryList = freezed,
+    Object? locationLoading = freezed,
   }) {
     return _then(_HomeState(
       name: name == freezed
@@ -184,6 +195,10 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.countryList
           : countryList // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      locationLoading: locationLoading == freezed
+          ? _value.locationLoading
+          : locationLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -198,7 +213,8 @@ class _$_HomeState implements _HomeState {
       this.country,
       this.covidCases,
       this.selectedCountry,
-      this.countryList});
+      this.countryList,
+      this.locationLoading = false});
 
   @override
   final String? name;
@@ -214,10 +230,13 @@ class _$_HomeState implements _HomeState {
   final String? selectedCountry;
   @override
   final List<String>? countryList;
+  @JsonKey()
+  @override
+  final bool locationLoading;
 
   @override
   String toString() {
-    return 'HomeState(name: $name, photo: $photo, city: $city, country: $country, covidCases: $covidCases, selectedCountry: $selectedCountry, countryList: $countryList)';
+    return 'HomeState(name: $name, photo: $photo, city: $city, country: $country, covidCases: $covidCases, selectedCountry: $selectedCountry, countryList: $countryList, locationLoading: $locationLoading)';
   }
 
   @override
@@ -234,7 +253,9 @@ class _$_HomeState implements _HomeState {
             const DeepCollectionEquality()
                 .equals(other.selectedCountry, selectedCountry) &&
             const DeepCollectionEquality()
-                .equals(other.countryList, countryList));
+                .equals(other.countryList, countryList) &&
+            const DeepCollectionEquality()
+                .equals(other.locationLoading, locationLoading));
   }
 
   @override
@@ -246,7 +267,8 @@ class _$_HomeState implements _HomeState {
       const DeepCollectionEquality().hash(country),
       const DeepCollectionEquality().hash(covidCases),
       const DeepCollectionEquality().hash(selectedCountry),
-      const DeepCollectionEquality().hash(countryList));
+      const DeepCollectionEquality().hash(countryList),
+      const DeepCollectionEquality().hash(locationLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -262,7 +284,8 @@ abstract class _HomeState implements HomeState {
       String? country,
       int? covidCases,
       String? selectedCountry,
-      List<String>? countryList}) = _$_HomeState;
+      List<String>? countryList,
+      bool locationLoading}) = _$_HomeState;
 
   @override
   String? get name;
@@ -278,6 +301,8 @@ abstract class _HomeState implements HomeState {
   String? get selectedCountry;
   @override
   List<String>? get countryList;
+  @override
+  bool get locationLoading;
   @override
   @JsonKey(ignore: true)
   _$HomeStateCopyWith<_HomeState> get copyWith =>

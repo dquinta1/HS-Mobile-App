@@ -28,43 +28,34 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> locationUpdated() async {
-    final location = await _geolocation.determinePosition();
-    emit(
-      HomeState(
-        name: _bloc.state.user.name,
-        photo: _bloc.state.user.photo,
-        covidCases: state.covidCases,
-        city: location[0],
-        country: location[1],
-        selectedCountry: 'United States',
-      ),
-    );
+    emit(state.copyWith(locationLoading: true));
+    try {
+      final location = await _geolocation.determinePosition();
+      emit(
+        state.copyWith(
+          locationLoading: false,
+          city: location[0],
+          country: location[1],
+          selectedCountry: location[0],
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(city: 'unknown', country: 'unknown'));
+    }
   }
 
   void countryValueUpdated(String? value) {
-    emit(HomeState(
-      name: _bloc.state.user.name,
-      photo: _bloc.state.user.photo,
-      city: state.city,
-      country: state.country,
+    emit(state.copyWith(
       selectedCountry: value,
-      covidCases: state.covidCases,
     ));
   }
 
   void covidCaseUpdated() {
-    Timer.periodic(Duration(seconds: 5), (timer) {
-      print(state.covidCases);
-      Random random = new Random();
-      int randomNumber = random.nextInt(10);
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      final random = Random();
+      final randomNumber = random.nextInt(10);
       emit(
-        HomeState(
-            name: _bloc.state.user.name,
-            photo: _bloc.state.user.photo,
-            city: state.city,
-            country: state.country,
-            selectedCountry: state.selectedCountry,
-            covidCases: state.covidCases! + randomNumber),
+        state.copyWith(covidCases: state.covidCases! + randomNumber),
       );
     });
   }

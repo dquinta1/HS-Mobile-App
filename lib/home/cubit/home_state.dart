@@ -10,5 +10,6 @@ class HomeState with _$HomeState {
     int? covidCases,
     String? selectedCountry,
     List<String>? countryList,
+    @Default(false) bool locationLoading,
   }) = _HomeState;
 }

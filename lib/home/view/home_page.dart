@@ -38,7 +38,9 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
+    Widget _child = const Center(child: CircularProgressIndicator());
     return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+      if (state.locationLoading) return _child;
       return Column(
         children: [
           Row(
@@ -142,7 +144,7 @@ class _DashboardBarState extends State<DashboardBar> {
           ),
         ],
       ),
-      getCountrySelector(context)
+      //getCountrySelector(context)
     ]);
   }
 
@@ -204,7 +206,7 @@ class _ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCircleAvatar(
       photo: context.read<HomeCubit>().state.photo,
-      radius: 30,
+      radius: 25,
     );
   }
 }
