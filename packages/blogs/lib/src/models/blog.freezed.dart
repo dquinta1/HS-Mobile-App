@@ -26,15 +26,15 @@ class _$BlogTearOff {
       {required String id,
       required String title,
       required DateTime date,
-      String? body,
       String? author,
+      String? body,
       String? photo}) {
     return _Blog(
       id: id,
       title: title,
       date: date,
-      body: body,
       author: author,
+      body: body,
       photo: photo,
     );
   }
@@ -52,8 +52,8 @@ mixin _$Blog {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  String? get body => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
+  String? get body => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -69,8 +69,8 @@ abstract class $BlogCopyWith<$Res> {
       {String id,
       String title,
       DateTime date,
-      String? body,
       String? author,
+      String? body,
       String? photo});
 }
 
@@ -87,8 +87,8 @@ class _$BlogCopyWithImpl<$Res> implements $BlogCopyWith<$Res> {
     Object? id = freezed,
     Object? title = freezed,
     Object? date = freezed,
-    Object? body = freezed,
     Object? author = freezed,
+    Object? body = freezed,
     Object? photo = freezed,
   }) {
     return _then(_value.copyWith(
@@ -104,13 +104,13 @@ class _$BlogCopyWithImpl<$Res> implements $BlogCopyWith<$Res> {
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      body: body == freezed
-          ? _value.body
-          : body // ignore: cast_nullable_to_non_nullable
-              as String?,
       author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
+              as String?,
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
               as String?,
       photo: photo == freezed
           ? _value.photo
@@ -129,8 +129,8 @@ abstract class _$BlogCopyWith<$Res> implements $BlogCopyWith<$Res> {
       {String id,
       String title,
       DateTime date,
-      String? body,
       String? author,
+      String? body,
       String? photo});
 }
 
@@ -148,8 +148,8 @@ class __$BlogCopyWithImpl<$Res> extends _$BlogCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? date = freezed,
-    Object? body = freezed,
     Object? author = freezed,
+    Object? body = freezed,
     Object? photo = freezed,
   }) {
     return _then(_Blog(
@@ -165,13 +165,13 @@ class __$BlogCopyWithImpl<$Res> extends _$BlogCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      body: body == freezed
-          ? _value.body
-          : body // ignore: cast_nullable_to_non_nullable
-              as String?,
       author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
+              as String?,
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
               as String?,
       photo: photo == freezed
           ? _value.photo
@@ -188,8 +188,8 @@ class _$_Blog implements _Blog {
       {required this.id,
       required this.title,
       required this.date,
-      this.body,
       this.author,
+      this.body,
       this.photo});
 
   factory _$_Blog.fromJson(Map<String, dynamic> json) => _$$_BlogFromJson(json);
@@ -201,15 +201,15 @@ class _$_Blog implements _Blog {
   @override
   final DateTime date;
   @override
-  final String? body;
-  @override
   final String? author;
+  @override
+  final String? body;
   @override
   final String? photo;
 
   @override
   String toString() {
-    return 'Blog(id: $id, title: $title, date: $date, body: $body, author: $author, photo: $photo)';
+    return 'Blog(id: $id, title: $title, date: $date, author: $author, body: $body, photo: $photo)';
   }
 
   @override
@@ -220,8 +220,8 @@ class _$_Blog implements _Blog {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.date, date) &&
-            const DeepCollectionEquality().equals(other.body, body) &&
             const DeepCollectionEquality().equals(other.author, author) &&
+            const DeepCollectionEquality().equals(other.body, body) &&
             const DeepCollectionEquality().equals(other.photo, photo));
   }
 
@@ -231,8 +231,8 @@ class _$_Blog implements _Blog {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(date),
-      const DeepCollectionEquality().hash(body),
       const DeepCollectionEquality().hash(author),
+      const DeepCollectionEquality().hash(body),
       const DeepCollectionEquality().hash(photo));
 
   @JsonKey(ignore: true)
@@ -251,8 +251,8 @@ abstract class _Blog implements Blog {
       {required String id,
       required String title,
       required DateTime date,
-      String? body,
       String? author,
+      String? body,
       String? photo}) = _$_Blog;
 
   factory _Blog.fromJson(Map<String, dynamic> json) = _$_Blog.fromJson;
@@ -264,9 +264,9 @@ abstract class _Blog implements Blog {
   @override
   DateTime get date;
   @override
-  String? get body;
-  @override
   String? get author;
+  @override
+  String? get body;
   @override
   String? get photo;
   @override

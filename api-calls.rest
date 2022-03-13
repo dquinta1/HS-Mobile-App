@@ -1,0 +1,19 @@
+POST https://graphql.contentful.com/content/v1/spaces/toq4428iudhc/
+Content-Type: application/json
+Authorization: Bearer SJzuxAWAyxFy-15hC9-LzXgtN3ZqUd8rYlgdhcfCIug
+X-REQUEST-TYPE: GraphQL
+
+{
+    pageCollection {
+        items {
+            title
+            information
+            date
+            image {
+                url
+        }
+    }
+  }
+}
+
+###
