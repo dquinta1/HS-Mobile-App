@@ -5,6 +5,11 @@ class HomeState with _$HomeState {
   const factory HomeState({
     String? name,
     String? photo,
-    String? location,
+    String? city,
+    String? country,
+    int? covidCases,
+    String? selectedCountry,
+    List<String>? countryList,
+    @Default(false) bool locationLoading,
   }) = _HomeState;
 }

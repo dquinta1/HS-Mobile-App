@@ -4,6 +4,7 @@ import 'package:blogs_repository/blogs_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:geolocation_repository/geolocation_repository.dart';
 import 'package:hs_mobile_app/app/app.dart';
 import 'package:hs_mobile_app/env_config.dart';
 import 'package:storage_repository/storage_repository.dart';
@@ -25,13 +26,15 @@ Future<void> main() async {
   final IAuthenticationRepository authenticationRepository;
   final IBlogRepository blogRepository;
   final IStorageRepository storageRepository;
+  final IGeolocationRepository geolocationRepository;
 
+  // TODO: create Mock geolocation service and instantiate two types of services in if else blocks
+  geolocationRepository = GeolocationService();
   if (envConfig == EnvironmentConfiguration.prod) {
     authenticationRepository = FirebaseAuthentication();
     // TODO: replace below for this: blogRepository = ContentfulBlog();
     blogRepository = MockBlog();
     storageRepository = FirebaseStorage();
-
     // awaits until firebase can get user from cache, else user.unauth'd
     await authenticationRepository.user.first;
   } else {
@@ -44,5 +47,6 @@ Future<void> main() async {
         authenticationRepository: authenticationRepository,
         blogRepository: blogRepository,
         storageRepository: storageRepository,
+        geolocationRepository: geolocationRepository,
       )));
 }
