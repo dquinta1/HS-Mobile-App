@@ -1,7 +1,6 @@
-name: geolocation
+name: geolocation_repository
 description: Geolocation service
 version: 0.0.1
-homepage:
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
@@ -10,12 +9,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  freezed_annotation: ^1.1.0
   geolocator: ^8.2.0
   geocoding: ^2.0.2
+  json_annotation: ^4.4.0
 
 dev_dependencies:
+  build_runner: ^2.1.7
   flutter_test:
     sdk: flutter
+  freezed: ^1.1.0
+  json_serializable: ^6.1.4
   flutter_lints: ^1.0.0
 
 # For information on the generic Dart part of this file, see the

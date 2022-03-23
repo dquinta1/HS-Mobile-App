@@ -16,8 +16,6 @@ dependencies:
   bloc: ^8.0.2
   blogs_repository:
     path: packages/blogs
-  geolocation:
-    path: packages/geolocation
   cupertino_icons: ^1.0.2
   data_repository:
     path: packages/data
@@ -29,6 +27,8 @@ dependencies:
     path: packages/form_inputs
   formz: ^0.4.1
   freezed_annotation: ^1.1.0
+  geolocation_repository:
+    path: packages/geolocation
   intl: ^0.17.0
   json_annotation: ^4.4.0
   meta: ^1.7.0

@@ -1,13 +1,14 @@
-import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocation_repository/geolocation_repository.dart';
+import 'package:geolocator/geolocator.dart';
 
 /// A Calculator.
-class GeolocationService {
-  Future<List<String?>> determinePosition() async {
+class GeolocationService implements IGeolocationRepository {
+  @override
+  Future<Geolocation> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
-    print('geolocation');
     // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -39,21 +40,24 @@ class GeolocationService {
     // continue accessing the position of the device.
     Position currentPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    print(currentPosition.longitude);
-    print(currentPosition.latitude);
-    return await _getAddressFromLatLng(
+
+    Placemark placemark = await _getAddressFromLatLng(
         currentPosition.latitude, currentPosition.longitude);
+    return Geolocation(
+      latitude: currentPosition.latitude,
+      longitude: currentPosition.longitude,
+      city: placemark.locality,
+      country: placemark.country,
+    );
   }
 
-  Future<List<String?>> _getAddressFromLatLng(
+  Future<Placemark> _getAddressFromLatLng(
       double latitude, double longitude) async {
     try {
       List<Placemark> p = await placemarkFromCoordinates(latitude, longitude);
-      Placemark place = p.elementAt(0);
-      return [place.locality, place.country];
+      return p.first;
     } catch (e) {
-      print(e.toString());
-      return ['unknown', 'unknown'];
+      return Future.error('Address error');
     }
   }
 }
