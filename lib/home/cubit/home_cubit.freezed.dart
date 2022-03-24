@@ -17,11 +17,24 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HomeStateTearOff {
   const _$HomeStateTearOff();
 
-  _HomeState call({String? name, String? photo, String? location}) {
+  _HomeState call(
+      {String? name,
+      String? photo,
+      String? city,
+      String? country,
+      int? covidCases,
+      String? selectedCountry,
+      List<String>? countryList,
+      bool locationLoading = false}) {
     return _HomeState(
       name: name,
       photo: photo,
-      location: location,
+      city: city,
+      country: country,
+      covidCases: covidCases,
+      selectedCountry: selectedCountry,
+      countryList: countryList,
+      locationLoading: locationLoading,
     );
   }
 }
@@ -33,7 +46,12 @@ const $HomeState = _$HomeStateTearOff();
 mixin _$HomeState {
   String? get name => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
-  String? get location => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get country => throw _privateConstructorUsedError;
+  int? get covidCases => throw _privateConstructorUsedError;
+  String? get selectedCountry => throw _privateConstructorUsedError;
+  List<String>? get countryList => throw _privateConstructorUsedError;
+  bool get locationLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -44,7 +62,15 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({String? name, String? photo, String? location});
+  $Res call(
+      {String? name,
+      String? photo,
+      String? city,
+      String? country,
+      int? covidCases,
+      String? selectedCountry,
+      List<String>? countryList,
+      bool locationLoading});
 }
 
 /// @nodoc
@@ -59,7 +85,12 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   $Res call({
     Object? name = freezed,
     Object? photo = freezed,
-    Object? location = freezed,
+    Object? city = freezed,
+    Object? country = freezed,
+    Object? covidCases = freezed,
+    Object? selectedCountry = freezed,
+    Object? countryList = freezed,
+    Object? locationLoading = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -70,10 +101,30 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: location == freezed
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
               as String?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      covidCases: covidCases == freezed
+          ? _value.covidCases
+          : covidCases // ignore: cast_nullable_to_non_nullable
+              as int?,
+      selectedCountry: selectedCountry == freezed
+          ? _value.selectedCountry
+          : selectedCountry // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countryList: countryList == freezed
+          ? _value.countryList
+          : countryList // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      locationLoading: locationLoading == freezed
+          ? _value.locationLoading
+          : locationLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -84,7 +135,15 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _HomeState value, $Res Function(_HomeState) then) =
       __$HomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? name, String? photo, String? location});
+  $Res call(
+      {String? name,
+      String? photo,
+      String? city,
+      String? country,
+      int? covidCases,
+      String? selectedCountry,
+      List<String>? countryList,
+      bool locationLoading});
 }
 
 /// @nodoc
@@ -100,7 +159,12 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? photo = freezed,
-    Object? location = freezed,
+    Object? city = freezed,
+    Object? country = freezed,
+    Object? covidCases = freezed,
+    Object? selectedCountry = freezed,
+    Object? countryList = freezed,
+    Object? locationLoading = freezed,
   }) {
     return _then(_HomeState(
       name: name == freezed
@@ -111,10 +175,30 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: location == freezed
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
               as String?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      covidCases: covidCases == freezed
+          ? _value.covidCases
+          : covidCases // ignore: cast_nullable_to_non_nullable
+              as int?,
+      selectedCountry: selectedCountry == freezed
+          ? _value.selectedCountry
+          : selectedCountry // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countryList: countryList == freezed
+          ? _value.countryList
+          : countryList // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      locationLoading: locationLoading == freezed
+          ? _value.locationLoading
+          : locationLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -122,18 +206,37 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HomeState implements _HomeState {
-  const _$_HomeState({this.name, this.photo, this.location});
+  const _$_HomeState(
+      {this.name,
+      this.photo,
+      this.city,
+      this.country,
+      this.covidCases,
+      this.selectedCountry,
+      this.countryList,
+      this.locationLoading = false});
 
   @override
   final String? name;
   @override
   final String? photo;
   @override
-  final String? location;
+  final String? city;
+  @override
+  final String? country;
+  @override
+  final int? covidCases;
+  @override
+  final String? selectedCountry;
+  @override
+  final List<String>? countryList;
+  @JsonKey()
+  @override
+  final bool locationLoading;
 
   @override
   String toString() {
-    return 'HomeState(name: $name, photo: $photo, location: $location)';
+    return 'HomeState(name: $name, photo: $photo, city: $city, country: $country, covidCases: $covidCases, selectedCountry: $selectedCountry, countryList: $countryList, locationLoading: $locationLoading)';
   }
 
   @override
@@ -143,7 +246,16 @@ class _$_HomeState implements _HomeState {
             other is _HomeState &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.photo, photo) &&
-            const DeepCollectionEquality().equals(other.location, location));
+            const DeepCollectionEquality().equals(other.city, city) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality()
+                .equals(other.covidCases, covidCases) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedCountry, selectedCountry) &&
+            const DeepCollectionEquality()
+                .equals(other.countryList, countryList) &&
+            const DeepCollectionEquality()
+                .equals(other.locationLoading, locationLoading));
   }
 
   @override
@@ -151,7 +263,12 @@ class _$_HomeState implements _HomeState {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(photo),
-      const DeepCollectionEquality().hash(location));
+      const DeepCollectionEquality().hash(city),
+      const DeepCollectionEquality().hash(country),
+      const DeepCollectionEquality().hash(covidCases),
+      const DeepCollectionEquality().hash(selectedCountry),
+      const DeepCollectionEquality().hash(countryList),
+      const DeepCollectionEquality().hash(locationLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -160,15 +277,32 @@ class _$_HomeState implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState({String? name, String? photo, String? location}) =
-      _$_HomeState;
+  const factory _HomeState(
+      {String? name,
+      String? photo,
+      String? city,
+      String? country,
+      int? covidCases,
+      String? selectedCountry,
+      List<String>? countryList,
+      bool locationLoading}) = _$_HomeState;
 
   @override
   String? get name;
   @override
   String? get photo;
   @override
-  String? get location;
+  String? get city;
+  @override
+  String? get country;
+  @override
+  int? get covidCases;
+  @override
+  String? get selectedCountry;
+  @override
+  List<String>? get countryList;
+  @override
+  bool get locationLoading;
   @override
   @JsonKey(ignore: true)
   _$HomeStateCopyWith<_HomeState> get copyWith =>
