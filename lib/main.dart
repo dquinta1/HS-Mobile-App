@@ -28,8 +28,7 @@ Future<void> main() async {
 
   if (envConfig == EnvironmentConfiguration.prod) {
     authenticationRepository = FirebaseAuthentication();
-    // TODO: replace below for this: blogRepository = ContentfulBlog();
-    blogRepository = MockBlog();
+    blogRepository = ContentfulBlog();
     storageRepository = FirebaseStorage();
 
     // awaits until firebase can get user from cache, else user.unauth'd

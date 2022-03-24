@@ -4,14 +4,19 @@ Authorization: Bearer SJzuxAWAyxFy-15hC9-LzXgtN3ZqUd8rYlgdhcfCIug
 X-REQUEST-TYPE: GraphQL
 
 {
-    pageCollection {
+    pageCollection(where: {
+        sys: {
+          id_in: ["5KZkrAFUascF20azckCisu"]
+      }
+    }) {
         items {
+            sys {
+              id
+              publishedAt
+            }
             title
             information
-            date
-            image {
-                url
-        }
+            image {url}
     }
   }
 }

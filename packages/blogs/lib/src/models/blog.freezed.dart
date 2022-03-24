@@ -183,14 +183,15 @@ class __$BlogCopyWithImpl<$Res> extends _$BlogCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Blog implements _Blog {
+class _$_Blog extends _Blog {
   _$_Blog(
       {required this.id,
       required this.title,
       required this.date,
       this.author,
       this.body,
-      this.photo});
+      this.photo})
+      : super._();
 
   factory _$_Blog.fromJson(Map<String, dynamic> json) => _$$_BlogFromJson(json);
 
@@ -246,7 +247,7 @@ class _$_Blog implements _Blog {
   }
 }
 
-abstract class _Blog implements Blog {
+abstract class _Blog extends Blog {
   factory _Blog(
       {required String id,
       required String title,
@@ -254,6 +255,7 @@ abstract class _Blog implements Blog {
       String? author,
       String? body,
       String? photo}) = _$_Blog;
+  _Blog._() : super._();
 
   factory _Blog.fromJson(Map<String, dynamic> json) = _$_Blog.fromJson;
 

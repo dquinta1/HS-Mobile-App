@@ -4,14 +4,10 @@
 
 #### Packages
 
-- Image Storage: implement proper Failure classes
-- Blogs: resolve TODOS (implement Failure class)
-
-#### HSMap APIs
-
-- Contentful: create graphQL repository to hold this API service
-- Contentful: service returns list of up-date blogs/news
-- Contentful: service returns a specific blog/news given its ID
+- Image Storage: implement proper Failure class
+- Blogs: Implement Failure Class
+- Blogs: there is no *author* field in the Contentful API
+- Blogs: resolve remaining TODOS 
 
 #### Shared Preferences and Cache
 
@@ -22,11 +18,11 @@
 
 #### News
 
-- News View: resolve TODOs
+- News Details: Add scrollbar for UX feedback purposes
+- News Details: Long titles overflow, reformat to fit in screen
+- News View: Long titles overflow, fix with *maxLength* property and replace with **...**
 - News View: Add a skeleton loading visual (similar to AntD's) for the cards while fetching
-- News View: NetworkImage has a loading delay, need a loading state and placeholder fallback
-- News View: Navigating to News Details has a weird behavior where after loading it stays on view
-for a moment and then goes to Details
+- News View: resolve remaining TODOs
 
 #### Profile
 
@@ -45,7 +41,7 @@ for a moment and then goes to Details
 - Profile: Edit Profile
 - Profile: Image Upload
 
-### Presentation Layer
+### Presentation Layer (Beautify All Below)
 
 - Log In
 - Sign Up
