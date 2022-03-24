@@ -32,8 +32,7 @@ Future<void> main() async {
   geolocationRepository = GeolocationService();
   if (envConfig == EnvironmentConfiguration.prod) {
     authenticationRepository = FirebaseAuthentication();
-    // TODO: replace below for this: blogRepository = ContentfulBlog();
-    blogRepository = MockBlog();
+    blogRepository = ContentfulBlog();
     storageRepository = FirebaseStorage();
     // awaits until firebase can get user from cache, else user.unauth'd
     await authenticationRepository.user.first;
