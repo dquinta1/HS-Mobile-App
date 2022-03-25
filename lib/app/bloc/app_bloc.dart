@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -22,7 +23,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     _userSubscription = _authenticationRepository.user.listen(
       (user) {
         add(AppEvent.userChanged(user: user));
-        print('AppEvent.userChanged(user: $user)');
+        developer.log('AppEvent.userChanged(user: $user)');
       },
     );
   }

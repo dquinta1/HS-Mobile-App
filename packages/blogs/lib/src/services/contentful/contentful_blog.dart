@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'package:blogs_repository/blogs_repository.dart';
 import 'package:http/http.dart' as http;
@@ -32,18 +33,18 @@ class ContentfulBlog implements IBlogRepository {
             }'''
           }));
 
-      if (res.statusCode != 200) {
-        //TODO: implement proper failures to account for these errors
-        print(res.body);
-        throw Exception('Error: Response with status code: ${res.statusCode}');
+      if (res.statusCode >= 400) {
+        developer.log('Response received with status code: ${res.statusCode}');
+        developer.log('The Response:\n' + res.body);
+        throw BlogFailure('Error: HTTP Status Code: ${res.statusCode}');
       } else {
         final data = jsonDecode(res.body)['data']['pageCollection']['items'];
         return List.generate(
             data.length, (index) => Blog.fromContentfulData(data[index]));
       }
     } catch (e) {
-      //TODO: implement proper failures to account for these errors
-      throw Exception(e.toString());
+      developer.log(e.toString());
+      throw BlogFailure();
     }
   }
 
@@ -80,19 +81,19 @@ class ContentfulBlog implements IBlogRepository {
             'variables': {'id': id},
           }));
 
-      if (res.statusCode != 200) {
-        print('Response received with status code: ${res.statusCode}');
-        print(res.body);
-        //TODO: implement proper failures to account for these errors
-        throw Exception('Error: Response with status code: ${res.statusCode}');
+      if (res.statusCode >= 400) {
+        developer.log('Response received with status code: ${res.statusCode}');
+        developer.log('The Response:\n' + res.body);
+        throw BlogFailure('Error: HTTP Status Code: ${res.statusCode}');
       } else {
         final data = jsonDecode(res.body)['data']['pageCollection']['items'][0];
-        print(data);
         return Blog.fromContentfulData(data);
       }
+    } on BlogFailure catch (e) {
+      throw e;
     } catch (e) {
-      //TODO: implement proper failures to account for these errors
-      throw Exception(e.toString());
+      developer.log(e.toString());
+      throw BlogFailure();
     }
   }
 }

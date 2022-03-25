@@ -5,9 +5,7 @@
 #### Packages
 
 - Image Storage: implement proper Failure class
-- Blogs: Implement Failure Class
 - Blogs: there is no *author* field in the Contentful API
-- Blogs: resolve remaining TODOS 
 
 #### Shared Preferences and Cache
 
@@ -18,9 +16,6 @@
 
 #### News
 
-- News Details: Add scrollbar for UX feedback purposes
-- News Details: Long titles overflow, reformat to fit in screen
-- News View: Long titles overflow, fix with *maxLength* property and replace with **...**
 - News View: Add a skeleton loading visual (similar to AntD's) for the cards while fetching
 - News View: resolve remaining TODOs
 

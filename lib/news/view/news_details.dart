@@ -28,6 +28,7 @@ class NewsDetails extends StatelessWidget {
               photo: _blog!.photo,
               title: _blog!.title,
               date: _blog!.date,
+              controller: ScrollController(),
             ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -54,11 +55,13 @@ class _BlogDetails extends StatelessWidget {
     String? photo,
     required String title,
     required DateTime date,
+    required ScrollController controller,
   })  : _author = author,
         _body = body,
         _photo = photo,
         _title = title,
         _date = date,
+        _scrollController = controller,
         super(key: key);
 
   final String? _author;
@@ -66,10 +69,12 @@ class _BlogDetails extends StatelessWidget {
   final String? _photo;
   final String _title;
   final DateTime _date;
+  final ScrollController _scrollController;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Column(
         children: [
           if (_photo == null)
@@ -99,17 +104,26 @@ class _BlogDetails extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text(
-                      _title,
-                      textAlign: TextAlign.start,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 24,
+                    Flexible(
+                      child: Text(
+                        _title,
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        softWrap: false,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 24,
+                        ),
                       ),
                     ),
+                  ],
+                ),
+                Row(
+                  children: [
                     Expanded(child: Container()),
                     Text(
-                      DateFormat.yMMM().format(_date),
+                      DateFormat.yMMMd().format(_date),
                       textAlign: TextAlign.end,
                       style: const TextStyle(fontSize: 18, color: Colors.grey),
                     )
@@ -122,8 +136,7 @@ class _BlogDetails extends StatelessWidget {
                 else
                   Padding(
                     padding: const EdgeInsets.fromLTRB(4, 4, 4, 8),
-                    child: Text(
-                        _body! + _body! + _body! + _body! + _body! + _body!),
+                    child: Text(_body!),
                   ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(4, 4, 6, 8),
