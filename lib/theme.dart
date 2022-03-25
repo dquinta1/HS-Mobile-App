@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 final theme = ThemeData(
-    //2
     primaryColor: Colors.purple,
     scaffoldBackgroundColor: Colors.white,
-    fontFamily: 'Montserrat', //3
+    scrollbarTheme: ScrollbarThemeData(
+      interactive: true,
+        isAlwaysShown: true,
+        thickness: MaterialStateProperty.all(10),
+        thumbColor: MaterialStateProperty.all(Colors.blue),
+        radius: const Radius.circular(10),
+        minThumbLength: 100),
+    fontFamily: 'Montserrat',
     buttonTheme: ButtonThemeData(
-      // 4
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       buttonColor: Colors.purple.shade300,
     ));

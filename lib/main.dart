@@ -34,9 +34,10 @@ Future<void> main() async {
     authenticationRepository = FirebaseAuthentication();
     blogRepository = ContentfulBlog();
     storageRepository = FirebaseStorage();
+
     // awaits until firebase can get user from cache, else user.unauth'd
     await authenticationRepository.user.first;
-  } else {
+  } else { // default to dev environment, instantiate mock services
     authenticationRepository = MockAuthentication();
     blogRepository = MockBlog();
     storageRepository = MockStorage();

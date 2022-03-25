@@ -45,26 +45,26 @@ class _NewsViewState extends State<NewsView> {
             } else {
               setState(() {
                 _child = ListView.builder(
-                  itemCount: state.blogs!.length,
-                  itemBuilder: (context, index) {
-                    return _BlogCard(
-                      title: state.blogs![index].title,
-                      author: state.blogs![index].author,
-                      photo: state.blogs![index].photo,
-                      date: state.blogs![index].date,
-                      onClick: () async {
-                        final blog = await context
-                            .read<NewsCubit>()
-                            .seeDetails(state.blogs![index].id);
-                        if (blog != null) {
-                          // ignore: unawaited_futures, use_build_context_synchronously
-                          Navigator.of(newsContext)
-                              .push<void>(NewsDetails.route(blog));
-                        }
-                      },
-                    );
-                  },
-                );
+                    itemCount: state.blogs!.length,
+                    itemBuilder: (context, index) {
+                      return _BlogCard(
+                        title: state.blogs![index].title,
+                        author: state.blogs![index].author,
+                        photo: state.blogs![index].photo,
+                        date: state.blogs![index].date,
+                        onClick: () async {
+                          final blog = await context
+                              .read<NewsCubit>()
+                              .seeDetails(state.blogs![index].id);
+                          if (blog != null) {
+                            // ignore: unawaited_futures, use_build_context_synchronously
+                            Navigator.of(newsContext)
+                                .push<void>(NewsDetails.route(blog));
+                          }
+                        },
+                      );
+                    },
+                  );
               });
             }
           },
@@ -136,10 +136,15 @@ class _BlogCard extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
-                  Text(
-                    _title,
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(fontSize: 22),
+                  Flexible(
+                    child: Text(
+                      _title,
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      softWrap: false,
+                      style: const TextStyle(fontSize: 22),
+                    ),
                   ),
                 ],
               ),
@@ -155,7 +160,7 @@ class _BlogCard extends StatelessWidget {
                   ),
                   Expanded(child: Container()),
                   Text(
-                    DateFormat.yMMM().format(_date),
+                    DateFormat.yMMMd().format(_date),
                     textAlign: TextAlign.end,
                     style: const TextStyle(fontSize: 18, color: Colors.grey),
                   ),

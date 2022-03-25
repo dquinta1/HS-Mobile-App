@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 import 'dart:io';
 
 import 'package:authentication_repository/authentication_repository.dart';
@@ -159,7 +160,8 @@ class ProfileCubit extends Cubit<ProfileState> {
               await _storageRepository.getImageReference(url: _oldPhotoUrl);
           await _storageRepository.deleteImage(reference: _ref);
         } on Exception catch (e) {
-          print('An Exception was thrown when deleting old avatar: $e');
+          developer.log('An Exception was thrown when deleting old avatar: $e');
+          throw UnimplementedError('Implement ImageStorageFailure Class');
         }
       }
     }

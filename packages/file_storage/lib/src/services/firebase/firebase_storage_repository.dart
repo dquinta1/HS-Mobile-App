@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -23,7 +24,7 @@ class FirebaseStorage implements IStorageRepository {
           await _firebaseStorage.ref('profile/$filePath').getDownloadURL();
       return url;
     } on FirebaseException catch (e) {
-      print(e.message);
+      developer.log('Firebase Storage Error: ${e.message}');
       throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     }
   }
@@ -34,6 +35,7 @@ class FirebaseStorage implements IStorageRepository {
       final _url = await reference.getDownloadURL();
       return _url;
     } on FirebaseException catch (e) {
+      developer.log('Firebase Storage Error: ${e.message}');
       throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     }
   }
@@ -44,6 +46,7 @@ class FirebaseStorage implements IStorageRepository {
       final _ref = await _firebaseStorage.refFromURL(url);
       return _ref;
     } on FirebaseException catch (e) {
+      developer.log('Firebase Storage Error: ${e.message}');
       throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     }
   }
@@ -53,6 +56,7 @@ class FirebaseStorage implements IStorageRepository {
     try {
       await reference.delete();
     } on FirebaseException catch (e) {
+      developer.log('Firebase Storage Error: ${e.message}');
       throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     }
   }

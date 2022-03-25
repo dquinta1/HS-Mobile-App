@@ -20,9 +20,9 @@ class NewsCubit extends Cubit<NewsState> {
       final blogs = await _blogRepository.getBlogs();
       emit(state.copyWith(loading: false, blogs: blogs));
     } on BlogFailure catch (e) {
-      emit(state.copyWith(errorMessage: e.message));
+      emit(state.copyWith(loading: false, errorMessage: e.message));
     } catch (e) {
-      emit(state.copyWith(errorMessage: 'Unknown Error'));
+      emit(state.copyWith(loading: false, errorMessage: 'Unknown Error'));
     }
   }
 
@@ -33,9 +33,9 @@ class NewsCubit extends Cubit<NewsState> {
 
       emit(state.copyWith(refreshing: false, blogs: blogs));
     } on BlogFailure catch (e) {
-      emit(state.copyWith(errorMessage: e.message));
+      emit(state.copyWith(refreshing: false, errorMessage: e.message));
     } catch (e) {
-      emit(state.copyWith(errorMessage: 'Unknown Error'));
+      emit(state.copyWith(refreshing: false, errorMessage: 'Unknown Error'));
     }
   }
 
@@ -48,9 +48,9 @@ class NewsCubit extends Cubit<NewsState> {
         blogs: state.blogs == null ? blogs : state.blogs! + blogs,
       ));
     } on BlogFailure catch (e) {
-      emit(state.copyWith(errorMessage: e.message));
+      emit(state.copyWith(fetchingMore: false, errorMessage: e.message));
     } catch (e) {
-      emit(state.copyWith(errorMessage: 'Unknown Error'));
+      emit(state.copyWith(fetchingMore: false, errorMessage: 'Unknown Error'));
     }
   }
 
@@ -61,10 +61,10 @@ class NewsCubit extends Cubit<NewsState> {
       emit(state.copyWith(loading: false));
       return blog;
     } on BlogFailure catch (e) {
-      emit(state.copyWith(errorMessage: e.message));
+      emit(state.copyWith(loading: false, errorMessage: e.message));
       return null;
     } catch (e) {
-      emit(state.copyWith(errorMessage: 'Unknown Error'));
+      emit(state.copyWith(loading: false, errorMessage: 'Unknown Error'));
       return null;
     }
   }
