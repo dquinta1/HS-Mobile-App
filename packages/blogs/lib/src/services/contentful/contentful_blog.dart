@@ -26,7 +26,6 @@ class ContentfulBlog implements IBlogRepository {
                       publishedAt
                     }
                     title
-                    information
                     image {url}
                 }
               }
