@@ -22,3 +22,24 @@ X-REQUEST-TYPE: GraphQL
 }
 
 ###
+
+POST https://graphql.contentful.com/content/v1/spaces/toq4428iudhc/
+Content-Type: application/json
+Authorization: Bearer SJzuxAWAyxFy-15hC9-LzXgtN3ZqUd8rYlgdhcfCIug
+X-REQUEST-TYPE: GraphQL
+
+{
+  pageCollection {
+    items {
+      sys {
+        id
+        publishedAt
+      }
+      title
+      information
+      image {url}
+    }
+  }
+}
+
+###

@@ -1,6 +1,10 @@
+import 'dart:developer' as developer;
+
 import 'package:blogs_repository/blogs_repository.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetails extends StatelessWidget {
   const NewsDetails({Key? key, required Blog? blog})
@@ -136,7 +140,7 @@ class _BlogDetails extends StatelessWidget {
                 else
                   Padding(
                     padding: const EdgeInsets.fromLTRB(4, 4, 4, 8),
-                    child: Text(_body!),
+                    child: _formatBlogBody(_body!),
                   ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(4, 4, 6, 8),
@@ -161,4 +165,123 @@ class _BlogDetails extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _formatBlogBody(String body) {
+  final _body = <Widget>[];
+
+  // try {
+  while (body.contains('[')) {
+    print('in while loop');
+
+    // find index of '['
+    final start = body.indexOf('[');
+
+    // check if it is an image or a reference
+    final bool isImage;
+    if (body[start - 1] == '!') {
+      isImage = true;
+    } else {
+      isImage = false;
+    }
+
+    // the Text part of the substring
+    final text =
+        isImage ? body.substring(0, start - 1) : body.substring(0, start);
+
+    // extract values for title and reference
+    final title = body.substring(start + 1, body.indexOf(']'));
+    final url =
+        body.substring(body.indexOf('(', start) + 1, body.indexOf(')', start));
+
+    // format url part accordingly
+    if (isImage) {
+      final image = Image.network(
+        url,
+        loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return Center(
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                  : null,
+            ),
+          );
+        },
+      );
+
+      // append formatted fragment to widget list
+      _body
+        ..add(Padding(
+          padding: const EdgeInsets.all(4),
+          child: Text(text),
+        ))
+        ..add(Padding(
+          padding: const EdgeInsets.all(4),
+          child: image,
+        ))
+        ..add(Padding(
+          padding: const EdgeInsets.all(2),
+          child: Text(
+            title,
+            textAlign: TextAlign.start,
+          ),
+        ));
+
+      // isImage == false
+    } else {
+      final formattedText = RichText(
+          text: TextSpan(children: [
+        TextSpan(style: const TextStyle(color: Colors.black), text: text),
+        TextSpan(
+            style: const TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+            ),
+            text: title,
+            recognizer: TapGestureRecognizer()
+              ..onTap = () async {
+                if (await canLaunch(url)) {
+                  await launch(url);
+                } else {
+                  print('Could not launch $url');
+                  developer.log('Could not launch $url');
+                  throw Exception('Could not launch $url');
+                }
+              }),
+      ]));
+
+      // append formatted fragment to widget list
+      _body.add(formattedText);
+    }
+
+    // change start index for body
+    if (body.indexOf(')') + 1 < body.length) {
+      body = body.substring(body.indexOf(')') + 1);
+    } else {
+      body = '';
+      break;
+    }
+  }
+  // } catch (e) {
+  //   developer.log(e.toString());
+  //   print(e.toString());
+  //   return const Center(
+  //       child: Text(
+  //           'An error ocurred when formatting, check logs for more information.'));
+  // }
+
+  if (body.isNotEmpty) {
+    _body.add(Padding(
+      padding: const EdgeInsets.all(4),
+      child: Text(body),
+    ));
+  }
+
+  return Column(children: _body);
 }
