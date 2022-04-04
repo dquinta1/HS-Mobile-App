@@ -169,75 +169,84 @@ class _BlogDetails extends StatelessWidget {
 
 Widget _formatBlogBody(String body) {
   final _body = <Widget>[];
+  final _textSpans = <TextSpan>[];
 
-  // try {
-  while (body.contains('[')) {
-    print('in while loop');
+  try {
+    while (body.contains('[')) {
+      // find index of '['
+      final start = body.indexOf('[');
 
-    // find index of '['
-    final start = body.indexOf('[');
+      // check if it is an image or a reference
+      final bool isImage;
+      if (body[start - 1] == '!') {
+        isImage = true;
+      } else {
+        isImage = false;
+      }
 
-    // check if it is an image or a reference
-    final bool isImage;
-    if (body[start - 1] == '!') {
-      isImage = true;
-    } else {
-      isImage = false;
-    }
+      // the Text part of the substring
+      final text =
+          isImage ? body.substring(0, start - 1) : body.substring(0, start);
 
-    // the Text part of the substring
-    final text =
-        isImage ? body.substring(0, start - 1) : body.substring(0, start);
+      // extract values for title and reference
+      final title = body.substring(start + 1, body.indexOf(']'));
+      final url = body.substring(
+          body.indexOf('(', start) + 1, body.indexOf(')', start));
 
-    // extract values for title and reference
-    final title = body.substring(start + 1, body.indexOf(']'));
-    final url =
-        body.substring(body.indexOf('(', start) + 1, body.indexOf(')', start));
+      // format url part accordingly
+      if (isImage) {
+        // if there were textSpans above format them and append them
+        if (_textSpans.isNotEmpty) {
+          final formattedText =
+              RichText(text: TextSpan(children: _textSpans.toList()));
+          _body.add(formattedText);
+          _textSpans.clear();
+        }
 
-    // format url part accordingly
-    if (isImage) {
-      final image = Image.network(
-        url,
-        loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent? loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          }
-          return Center(
-            child: CircularProgressIndicator(
-              value: loadingProgress.expectedTotalBytes != null
-                  ? loadingProgress.cumulativeBytesLoaded /
-                      loadingProgress.expectedTotalBytes!
-                  : null,
+        final image = Image.network(
+          url,
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                    : null,
+              ),
+            );
+          },
+        );
+
+        // append formatted fragment to widget list
+        _body
+          ..add(Padding(
+            padding: const EdgeInsets.all(4),
+            child: Text(text),
+          ))
+          ..add(Padding(
+            padding: const EdgeInsets.all(4),
+            child: image,
+          ))
+          ..add(Padding(
+            padding: const EdgeInsets.all(2),
+            child: Text(
+              title,
+              textAlign: TextAlign.start,
             ),
-          );
-        },
-      );
+          ));
 
-      // append formatted fragment to widget list
-      _body
-        ..add(Padding(
-          padding: const EdgeInsets.all(4),
-          child: Text(text),
-        ))
-        ..add(Padding(
-          padding: const EdgeInsets.all(4),
-          child: image,
-        ))
-        ..add(Padding(
-          padding: const EdgeInsets.all(2),
-          child: Text(
-            title,
-            textAlign: TextAlign.start,
-          ),
-        ));
+        // isImage == false
+      } else {
+        // regular text
+        final regular =
+            TextSpan(style: const TextStyle(color: Colors.black), text: text);
 
-      // isImage == false
-    } else {
-      final formattedText = RichText(
-          text: TextSpan(children: [
-        TextSpan(style: const TextStyle(color: Colors.black), text: text),
-        TextSpan(
+        // link text
+        final linkText = TextSpan(
             style: const TextStyle(
               color: Colors.blue,
               fontWeight: FontWeight.bold,
@@ -253,34 +262,49 @@ Widget _formatBlogBody(String body) {
                   developer.log('Could not launch $url');
                   throw Exception('Could not launch $url');
                 }
-              }),
-      ]));
+              });
 
-      // append formatted fragment to widget list
-      _body.add(formattedText);
+        // append consecutive text spans
+        _textSpans
+          ..add(regular)
+          ..add(linkText);
+      }
+
+      // change start index for body
+      if (body.indexOf(')') + 1 < body.length) {
+        body = body.substring(body.indexOf(')') + 1);
+      } else {
+        body = '';
+        break;
+      }
     }
+  } catch (e) {
+    developer.log(e.toString());
+    print(e.toString());
+    return const Text(
+        'An error ocurred when formatting, check logs for more information.');
+  }
 
-    // change start index for body
-    if (body.indexOf(')') + 1 < body.length) {
-      body = body.substring(body.indexOf(')') + 1);
+  // edge case check
+  if (body.isNotEmpty) {
+    // if there was a textSpan before, append it
+    if (_textSpans.isNotEmpty) {
+      _textSpans.add(
+          TextSpan(text: body, style: const TextStyle(color: Colors.black)));
     } else {
-      body = '';
-      break;
+      _body.add(Padding(
+        padding: const EdgeInsets.all(4),
+        child: Text(body),
+      ));
     }
   }
-  // } catch (e) {
-  //   developer.log(e.toString());
-  //   print(e.toString());
-  //   return const Center(
-  //       child: Text(
-  //           'An error ocurred when formatting, check logs for more information.'));
-  // }
 
-  if (body.isNotEmpty) {
-    _body.add(Padding(
-      padding: const EdgeInsets.all(4),
-      child: Text(body),
-    ));
+  // format the remaining textSpans
+  if (_textSpans.isNotEmpty) {
+    final formattedText =
+        RichText(text: TextSpan(children: _textSpans.toList()));
+    _body.add(formattedText);
+    _textSpans.clear();
   }
 
   return Column(children: _body);
