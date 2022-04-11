@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'home_widgets.dart';
+import 'package:hs_mobile_app/home/home.dart';
 
 class Introduction extends StatelessWidget {
   const Introduction({Key? key}) : super(key: key);

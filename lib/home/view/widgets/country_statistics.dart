@@ -1,9 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:hs_mobile_app/home/view/widgets/home_widgets.dart';
-
-import 'chart.dart';
+import 'package:hs_mobile_app/home/home.dart';
 
 class CountryStatistics extends StatelessWidget {
   const CountryStatistics(this.summaryList, {Key? key}) : super(key: key);

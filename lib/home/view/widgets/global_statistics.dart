@@ -1,8 +1,7 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:hs_mobile_app/home/home.dart';
 import 'package:intl/intl.dart';
-
-import 'home_widgets.dart';
 
 class GlobalStatistics extends StatelessWidget {
   const GlobalStatistics(GlobalSummary globalSummary, {Key? key})

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hs_mobile_app/home/cubit/home_cubit.dart';
-import 'package:hs_mobile_app/home/view/widgets/global_statistics.dart';
+import 'package:hs_mobile_app/home/home.dart';
 
 class Global extends StatefulWidget {
   const Global({Key? key}) : super(key: key);
