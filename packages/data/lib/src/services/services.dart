@@ -1,2 +1,2 @@
-export 'firestore/firestore_service.dart';
-export 'mock/mock_service.dart';
+export 'covid/covid_service.dart';
+export 'i_data_repository.dart';

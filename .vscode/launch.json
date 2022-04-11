@@ -1,0 +1,131 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "HS-Mobile-App",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "HS-Mobile-App (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "HS-Mobile-App (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "authentication",
+            "cwd": "packages/authentication",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "authentication (profile mode)",
+            "cwd": "packages/authentication",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "authentication (release mode)",
+            "cwd": "packages/authentication",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "blogs",
+            "cwd": "packages/blogs",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "blogs (profile mode)",
+            "cwd": "packages/blogs",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "blogs (release mode)",
+            "cwd": "packages/blogs",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "data",
+            "cwd": "packages/data",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "data (profile mode)",
+            "cwd": "packages/data",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "data (release mode)",
+            "cwd": "packages/data",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "file_storage",
+            "cwd": "packages/file_storage",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "file_storage (profile mode)",
+            "cwd": "packages/file_storage",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "file_storage (release mode)",
+            "cwd": "packages/file_storage",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "form_inputs",
+            "cwd": "packages/form_inputs",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "geolocation",
+            "cwd": "packages/geolocation",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "geolocation (profile mode)",
+            "cwd": "packages/geolocation",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "geolocation (release mode)",
+            "cwd": "packages/geolocation",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
