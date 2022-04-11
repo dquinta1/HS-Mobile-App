@@ -22,7 +22,7 @@ class UserProfile extends StatelessWidget {
 
   Widget getUserLocationWidget(BuildContext context) {
     final city = context.read<HomeCubit>().state.city;
-    final country = context.read<HomeCubit>().state.country;
+    final country = context.read<HomeCubit>().state.currentCountry;
     return Row(
       children: [
         const Icon(Icons.location_on, size: 12),

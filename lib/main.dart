@@ -1,6 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:blogs_repository/blogs_repository.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -27,9 +28,12 @@ Future<void> main() async {
   final IBlogRepository blogRepository;
   final IStorageRepository storageRepository;
   final IGeolocationRepository geolocationRepository;
+  final IDataRepository dataRepository;
 
   // TODO: create Mock geolocation service and instantiate two types of services in if else blocks
   geolocationRepository = GeolocationService();
+  dataRepository = CovidService();
+
   if (envConfig == EnvironmentConfiguration.prod) {
     authenticationRepository = FirebaseAuthentication();
     blogRepository = ContentfulBlog();
@@ -37,7 +41,8 @@ Future<void> main() async {
 
     // awaits until firebase can get user from cache, else user.unauth'd
     await authenticationRepository.user.first;
-  } else { // default to dev environment, instantiate mock services
+  } else {
+    // default to dev environment, instantiate mock services
     authenticationRepository = MockAuthentication();
     blogRepository = MockBlog();
     storageRepository = MockStorage();
@@ -48,5 +53,6 @@ Future<void> main() async {
         blogRepository: blogRepository,
         storageRepository: storageRepository,
         geolocationRepository: geolocationRepository,
+        dataRepository: dataRepository,
       )));
 }

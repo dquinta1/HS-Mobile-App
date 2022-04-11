@@ -4,4 +4,4 @@ enum EnvironmentConfiguration {
   test,
 }
 
-const EnvironmentConfiguration envConfig = EnvironmentConfiguration.prod;
+const EnvironmentConfiguration envConfig = EnvironmentConfiguration.dev;
