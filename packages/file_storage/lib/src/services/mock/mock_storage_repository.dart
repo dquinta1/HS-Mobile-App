@@ -17,6 +17,12 @@ class MockStorage implements IStorageRepository {
   }
 
   @override
+  Future<String> getFileUrlByPath({required String path}) async{
+    return Future.delayed(
+        Duration(milliseconds: 100), () => 'https://picsum.photos/200');
+  }
+
+  @override
   Future<Reference> getImageReference({required String url}) {
     return Future.delayed(Duration(milliseconds: 100));
   }

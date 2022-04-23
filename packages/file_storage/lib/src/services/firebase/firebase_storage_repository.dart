@@ -41,6 +41,17 @@ class FirebaseStorage implements IStorageRepository {
   }
 
   @override
+  Future<String> getFileUrlByPath({required String path}) async {
+    try {
+      final _url = await _firebaseStorage.ref(path).getDownloadURL();
+      return _url;
+    } on FirebaseException catch (e) {
+      developer.log('Firebase Storage Error: ${e.message}');
+      throw UnimplementedError('Implement ImageStorageException: ${e.message}');
+    }
+  }
+
+  @override
   Future<Reference> getImageReference({required String url}) async {
     try {
       final _ref = await _firebaseStorage.refFromURL(url);
