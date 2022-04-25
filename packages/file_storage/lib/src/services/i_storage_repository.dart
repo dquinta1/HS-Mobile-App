@@ -18,6 +18,12 @@ abstract class IStorageRepository {
   /// Throws [Exception] if an exception occurs
   Future<String> getImageUrl({required Reference reference});
 
+  /// Attemps to get url of an uploaded file by its path on firebase storage
+  /// Returns [String] url of the uploaded file
+  ///
+  /// Throws [Exception] if an exception occurs
+  Future<String> getFileUrlByPath({required String path});
+
   /// Attempts to get reference to an image provided its [url]
   ///
   /// Throws [Exception] if an exception occurs
