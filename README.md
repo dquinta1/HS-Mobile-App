@@ -10,6 +10,8 @@ This is the repo for the Hope-Simpson Project - Mobile App, currently in its Dev
         - this generates all the dependencies specified in the pubspec.yaml config file
     4- run "flutter run"
 
+For troubleshooting flutter issues, refer to [HS Flutter Troubleshooting](https://docs.google.com/document/d/1Bdah90lWtwheIvpTdMsPocU9a7aTRLC0SzPoEC2_Ycc/edit?usp=sharing) doc for common fixes. 
+
 ### Tasks Instructions
 There is a TODOS.md file that contains all the currently active tasks. Resolving any of these contributes to the overall project. The tasks can be thought of in this way:
 
