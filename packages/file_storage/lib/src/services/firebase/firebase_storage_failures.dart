@@ -2,7 +2,7 @@
 // https://firebase.google.com/docs/reference/unity/class/firebase/storage/storage-exception#class_firebase_1_1_storage_1_1_storage_exception
 // error.code defined here:
 // https://github.com/firebase/flutterfire/blob/master/packages/firebase_storage/firebase_storage/ios/Classes/FLTFirebaseStoragePlugin.m
-// It's possible that we may just directly reference these "Firebase.Storage.StorageException", instead
+// Possible that we may just directly reference these "Firebase.Storage.StorageException", instead
 // of having this ImageStorageFailure wrapper around it. 
 class ImageStorageFailure implements Exception {
   const ImageStorageFailure([

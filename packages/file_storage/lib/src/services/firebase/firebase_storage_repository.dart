@@ -26,8 +26,6 @@ class FirebaseStorage implements IStorageRepository {
     } on FirebaseException catch (e) {
       // if it's a broader exception not storage related
       throw ImageStorageFailure.fromCode(e.code);
-      // developer.log('Firebase Storage Error: ${e.message}');
-      // throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     } catch (_) {
       throw const ImageStorageFailure();
     }
@@ -41,8 +39,6 @@ class FirebaseStorage implements IStorageRepository {
     } on FirebaseException catch (e) {
       // if it's a broader exception not storage related
       throw ImageStorageFailure.fromCode(e.code);
-      // developer.log('Firebase Storage Error: ${e.message}');
-      // throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     } catch (_) {
       throw const ImageStorageFailure();
     }
@@ -56,8 +52,6 @@ class FirebaseStorage implements IStorageRepository {
     } on FirebaseException catch (e) {
       // if it's a broader exception not storage related
       throw ImageStorageFailure.fromCode(e.code);
-      // developer.log('Firebase Storage Error: ${e.message}');
-      // throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     } catch (_) {
       throw const ImageStorageFailure();
     }
@@ -71,8 +65,6 @@ class FirebaseStorage implements IStorageRepository {
     } on FirebaseException catch (e) {
       // if it's a broader exception not storage related
       throw ImageStorageFailure.fromCode(e.code);
-      // developer.log('Firebase Storage Error: ${e.message}');
-      // throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     } catch (_) {
       throw const ImageStorageFailure();
     }
@@ -85,8 +77,6 @@ class FirebaseStorage implements IStorageRepository {
     } on FirebaseException catch (e) {
       // if it's a broader exception not storage related
       throw ImageStorageFailure.fromCode(e.code);
-      // developer.log('Firebase Storage Error: ${e.message}');
-      // throw UnimplementedError('Implement ImageStorageException: ${e.message}');
     } catch (_) {
       throw const ImageStorageFailure();
     }
