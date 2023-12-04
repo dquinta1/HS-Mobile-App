@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
+// import 'package:custom_utils/custom_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
@@ -19,9 +20,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     required AppBloc bloc,
     required IAuthenticationRepository authenticationRepository,
     required IStorageRepository storageRepository,
+    required IImagePicker imagePicker,
   })  : _bloc = bloc,
         _authenticationRepository = authenticationRepository,
         _storageRepository = storageRepository,
+        _imagePicker = imagePicker,
         super(const ProfileState()) {
     emit(ProfileState(
       isEditing: false,
@@ -44,6 +47,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final IAuthenticationRepository _authenticationRepository;
   final IStorageRepository _storageRepository;
   late final StreamSubscription<AppState> _appBlocSubscription;
+  final IImagePicker _imagePicker;
 
   /// Handles switching between Static profile view and Editing profile view
   void editing(bool isEditing) {
@@ -107,7 +111,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> uploadAvatar(bool gallery) async {
     try {
       // emit(state.copyWith(status: FormzStatus.submissionInProgress));
-      final _image = await getImage(gallery);
+      final _image = await _imagePicker.getImage(gallery);
       final _url = await _storageRepository.uploadImage(image: _image);
       emit(state.copyWith(
         photo: _url,

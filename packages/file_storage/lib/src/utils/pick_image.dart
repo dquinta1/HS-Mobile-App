@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 /// or prompts the user to use the camera if [gallery] is false
 ///
 /// Returns a [File] with the selected image's path
-Future<File> getImage(bool gallery) async {
+Future<File> pickImage(bool gallery) async {
   ImagePicker picker = ImagePicker();
   XFile? pickedFile;
 

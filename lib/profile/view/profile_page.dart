@@ -19,6 +19,7 @@ class ProfilePage extends StatelessWidget {
         authenticationRepository: context.read<IAuthenticationRepository>(),
         storageRepository: context.read<IStorageRepository>(),
         bloc: context.read<AppBloc>(),
+        imagePicker: ImagePicker(),  // image picker need not be from context
       ),
       child: const ProfileView(),
     );

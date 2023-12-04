@@ -14,12 +14,15 @@ class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit({
     required IAuthenticationRepository authenticationRepository,
     required IStorageRepository storageRepository,
+    required IImagePicker imagePicker,
   })  : _authenticationRepository = authenticationRepository,
         _storageRepository = storageRepository,
+        _imagePicker = imagePicker,
         super(const SignUpState());
 
   final IAuthenticationRepository _authenticationRepository;
   final IStorageRepository _storageRepository;
+  final IImagePicker _imagePicker;
 
   void nameChanged(String value) {
     final name = value;
@@ -70,7 +73,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> uploadAvatar(bool gallery) async {
     try {
       // emit(state.copyWith(status: FormzStatus.submissionInProgress));
-      final _image = await getImage(gallery);
+      final _image = await _imagePicker.getImage(gallery);
       final _url = await _storageRepository.uploadImage(image: _image);
       emit(state.copyWith(
         photo: _url,

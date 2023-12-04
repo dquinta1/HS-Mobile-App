@@ -27,6 +27,7 @@ class SignUpPage extends StatelessWidget {
           create: (_) => SignUpCubit(
             authenticationRepository: context.read<IAuthenticationRepository>(),
             storageRepository: context.read<IStorageRepository>(),
+            imagePicker: ImagePicker(),  // image picker need not be from context
           ),
           child: const SignUpForm(),
         ),
